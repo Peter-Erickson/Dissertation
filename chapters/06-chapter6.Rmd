@@ -1,0 +1,185 @@
+---
+geometry: margin=1in
+output: 
+  bookdown::pdf_document2:
+    number_sections: TRUE
+    #indent: true
+    toc: false
+  #bookdown::pdf_document2: default
+reference-section-title: References
+bibliography: 
+  - dissertation.bib
+fontsize: 12pt 
+header-includes:
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{setspace}
+- \usepackage{sectsty}
+- \usepackage{paralist}
+- \usepackage{fancyhdr}
+- \usepackage{lastpage}
+- \usepackage{indentfirst}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{xcolor}
+- \usepackage{caption}
+- \usepackage{rotating, graphicx}
+- \usepackage{dcolumn}
+- \usepackage{ragged2e}
+---
+
+```{r loading-library0, include=FALSE, echo=FALSE}
+library("here")       # file paths
+library("tidyverse")  # workhorse package
+library("tidylog")
+library("kableExtra")
+library("knitr")
+library("ggdag")
+library("dagitty")
+library("gridExtra")
+library("broom")
+library("dplyr")
+library("reshape2")
+library("pacman")
+library("ggrepel")
+library("writexl")
+library("lme4")
+library("bucky")
+library("scales")
+library("stargazer")
+library("rstatix")
+library("brglm")
+library("margins")
+library("IRdisplay")
+library("texreg")
+library("cowplot")
+library("mice")
+library("miceadds")
+library("bookdown")
+library("sandwich")
+library("mitools")
+library("modelsummary")
+```
+
+\doublespace
+
+# Chapter Six {-}
+
+On September 11, 2001, terrorists hijacked several commercial airplanes and purposely crashed them into several sites, including the twin towers of the World Trade Center in New York City, the Pentagon in Washington D.C., and a field in Western Pennsylvania.^[Heroic Americans prevented this plane from reaching its intended target, the US Capitol or the White House, in Washington D.C. [@kean_911_2004, 14].] The evening of the 9/11 attacks, members of Congress gathered on the steps of the US capitol to express solidarity and resolve. After a moment of silence and short remarks by then speaker of the House Dennis Hastert, those gathered sang the song, "God Bless America" [@us_congress_members_2001].
+
+Seventeen months later, in February 2003, the Senate Armed Services Committee held a hearing regarding a likely US invasion of Iraq, which would begin the next months. The committee was interested in hearing the views of the respective military service chiefs regarding plans for the upcoming war. One exchange was particularly noteworthy. General Eric Shinseki, the Army Chief of Staff, told the committee that he thought that "something on the order of several hundred thousand soldiers" was a likely figure for stabilizing Iraq after the invasion [Shinseki, 2003 quoted in @fallows_karmic_2008]. Shinseki's remarks, however, went against the official position held by the Defense Department and it's civilian head, Donald Rumsfeld, and his second in command, Paul Wolfowitz, both of whom believed that a smaller, lighter military footprint was more than adequate for the pending task. In the days that followed, both Wolfowitz and Rumsfeld publicly criticized Shinseki's remarks. Shinseki, for his part, remained largely silent, and retired from the Army shortly afterward.  
+
+Eighteen and a half years later, the United States withdrew from Afghanistan after the resurgent Taliban quickly displaced the Afghan National Government in the summer of 2021. During a Congressional hearing held on 28 September 2021 about the withdrawal from Afghanistan, Tom Cotton, a veteran and the junior Republican Senator from Arkansas, asked the Chairman of the Joint Chiefs of Staff, General Mark Milley, "why haven't you resigned [@singman_milley_2021]?" The Senator's question alluded to the fact that General Milley, weeks before the collapse of the Afghan Government, had recommended to President Biden that the US maintain approximately 2,500 US Troops in Afghanistan, a recommendation that the President did not heed. General Milley responded to Cotton by noting that, "It would be an incredible act of political defiance for a commissioned officer to just resign because my advice is not taken...this country doesn't want generals figuring out what orders we are going to accept and do or not. That's not our job [@singman_milley_2021]." Furthermore, it is important to note that in the same hearing, before ever even discussing Afghanistan, General Milley briefly addressed allegations that he had inappropriately conversed with both a Chinese general and with the Speaker of the House, Nancy Pelosi, during the transition between President Trump and Biden [@baldor_watch_2021]. These allegations had provoked strong partisan reactions in the weeks leading up to the hearing. 
+
+Cotton's question by itself was not necessarily inappropriate, but it is highly likely that Cotton wished that Milley either would have resigned, or that Milley would at least have signaled to the public that he considered resigning as a result of the chaotic withdrawal from Afghanistan. Such an intimation from the mouth of a sitting Chairman of the Joint Chiefs of Staff would have generated significant political points for Congressional Republicans, as well as cause a fairly significant rift in civil-military relations at an already tense moment. 
+
+This chapter identifies, compares, and contrasts the patterns of political behavior engaged in by military and civilian actors throughout the post-9/11 era. From approximately 2001 - 2021, the level of military prestige remained high and relatively constant, but the level of political polarization rose sharply. As the preceding paragraphs note, civil-military tension exists when polarization is relatively low, as was the case in 2003, and when it is much higher, as in 2021. This chapter, however, explores how the political behaviors that occur in low versus highly polarized settings, but that involve a relatively prestigious military, are nonetheless different.  
+
+The chapter proceeds in four parts. First, I describe the predictions concerning the patterns of political behavior as a state moves from a domestic environment marked by low polarization and high military prestige to one marked by high polarization and high military prestige. In this section, I also substantiate the claim that such a movement approximates the change in the domestic environment that occurred in the United States from 2001 - 2021. In the second part of this chapter, I describe several political behaviors that occurred during the first portion of this period, from approximately 2001 - 2010. The third part of the chapter explores the political behaviors that occurred during the second portion of the period, from roughly 2011 - 2021. The fourth and final part of this case study evaluates, compares, and contrasts the political behaviors that occurred involving the military in these two periods. 
+
+Similar to the previous chapter, this chapter cannot, and therefore does not attempt, to recount or list every political behavior involving the military that occurred during the examined period. Instead, I focus on the tenor, characteristics, and tone of some of the most glaring political behaviors that civilian and military actors undertook throughout this period involving the military. Some of the episodes that will be described here have been alluded to in the previous empirical chapters. The chief argument made in this chapter is that there is moderate evidence to support the claim, in accordance with this dissertation's theoretical predictions, that the rise in the level of political polarization occurring from 2001 - 2021 has contributed to increases in both the politicization of the military and the undertaking of more extreme forms of political behavior by military and civilian actors.
+
+# Theoretical Predictions for the Post-9/11 Era, 2001-2021
+
+This section of the chapter describes the theoretical predictions for the patterns of political behavior involving the military that occur as the domestic environment changes. In particular, I will describe how the political behaviors change as the domestic environment shifts from one marked by relatively low polarization and high prestige to one characterized by high polarization and high military prestige. 
+
+## Low Polarization and High Military Prestige
+
+The theory presented in chapter two of this dissertation argued that the state's domestic environment strongly shapes the patterns of political behavior that occur involving the military. When the level of military prestige is high, both civilian and military actors are more likely to believe that the military can influence public opinion. For this reason, the theory argued that both types of actors will behave in ways that harness or leverage the prestige of the military to appeal to the public. 
+
+This theoretical expectation is rooted in the political communication literature, which argues that the public listens to those voices which are considered "knowledgeable" and "trustworthy" [@lupia_democratic_1998, 69-76; see also @zaller_nature_1992, 47]. The theory argued that as the level of military prestige rises, the public increasingly considers the military and its members to possess these traits. 
+
+When the level of polarization is relatively low, however, the theory predicts that there is relatively little basis for ideological division between and among military actors. Unlike when polarization exists at a high level, there are few if any major moral-worldview differences at work among military actors. This is not to say that military actors are entirely unified, or that there are no major disagreements whatsoever between and among military actors, when polarization is low. But the theory does predict that absent high polarization, there is little if any ideological basis, or _motive_ that exists, for military actors to behave in ways that violate the central principles of civil-military relations.
+
+In an environment marked by low polarization and high military prestige, the theory ultimately predicts that either military or civilian actors may induce politicization of the military, and engage in behaviors that violate the principles of civil-military relations. The theory even noted that such an environment is far from tranquil, and that there is a high potential for civil-military conflict altogether, as shown in the bottom left quadrant of Table \@ref(tab:poss-environment3). 
+
+```{r poss-environment3, echo=FALSE, include=TRUE, error=FALSE, message=FALSE}
+
+text_env_revised2 <- tribble(~"Environment", ~"Low Polarization", ~"High Polarization",
+  "Low Prestige", "No politicization; low levels of political activity; low potential for civil-military conflict", 
+  "Military (induced) politicization; moderate levels of political activity; moderate potential for civil-military conflict",  
+  "High Prestige", "Military and Civilian (induced) politicization; moderate levels of political activity; high potential for civil-military conflict", 
+  "Comprehensive politicization; extreme levels of political activity; significant potential for civil-military conflict" 
+  )
+ 
+
+  kable(text_env_revised2, booktabs=T, caption="Types of Domestic Environments for Civil-Military Relations and their Impact on Political Behaviors and the Conduct of Civil-Military Relations") %>%
+  kable_styling(full_width = F, font_size=10, latex_options="striped") %>% 
+  column_spec(1, width="8em") %>% 
+  column_spec(2:3, width="18em") 
+ 
+```
+
+Throughout US history, there have been several significant civil-military relations disputes that have occurred under conditions of low polarization and high military prestige. For example, disputes between General Douglas MacArthur and President Harry Truman over Korea, General Matthew Ridgeway and President Dwight Eisenhower over Ike's New Deal policies in the early 1950s, and Colin Powell and President Bill Clinton over several post-Cold War crises in the early 1990s all occurred in domestic environments marked by relatively low polarization and high military prestige. Therefore, we should not automatically conclude that the conduct of civil-military relations will be smooth or without tension when polarization is low and when military prestige is high. 
+
+## High Polarization and High Military Prestige
+
+As the level of polarization rises, however, the theory predicts that the potential for civil-military conflict increases. This occurs, moreover, because rising political polarization is associated with increasing ideological division occurring within and among military actors who, like the rest of society, become more polarized as the level of polarization grows. 
+
+At the core, rising levels of polarization attest to a loss of consensus or agreement concerning the moral values and ideals that should hold sway in society [@marsden_twilight_2014; @mann_its_2012; @allen_why_2020]. In highly polarizing times such as the contemporary age in the United States, the conflicts that emerge are not simply political in the sense that they involve whether society should enact policy "X" or policy "Y" with respect to any number of polarizing issues, but rather a conflict over the worldviews that underlie policy "X" or policy "Y". Chapter two noted several instances of polarizing issues in the contemporary United States, including the question of what it means to be an American, whether America should be proud of its history, and whether the construct of gender is important anymore. What these and many other polarizing issues have in common is that they cannot be solved nor even intelligently discussed without an individual referencing or alluding to some sort of moral-worldview commitment. 
+
+The reason that polarization matters for the conduct of civil-military relations, chapter two argued, is because one's commitment to any number of polarizing issues may in fact be stronger than one's commitment to the central principles of civil-military relations. Chapter two noted in particular that in highly polarizing environments, military actors more frequently encounter situations in which they have to choose between adhering to the principles of civil-military relations or advancing one or more polarizing issues with which they strongly identify or believe in. 
+
+As Table \@ref(tab:poss-environment3) notes, high polarization and high military prestige thus leads to an environment in which there is comprehensive politicization, extreme levels of political activity involving the military, and significant potential for civil-military conflict. These characteristics are even more severe than those that exist in a domestic environment marked by low polarization and high military prestige. 
+
+## Substantiation of Environmental Characteristics, 2001 - 2021
+
+To substantiate the claim that the level of polarization increased and the level of military prestige generally remained constant (but relatively high) over the period of 2001 - 2021, i rely on measurable quantitative data. This is different from the previous chapter that explored the post-US Civil War era, which relied on mainly qualitative data. Figure \@ref(case2-polar) plots the level of polarization in both the US House and the US Senate, as well as the level of trust and confidence in the US military, from 2001 - 2021. Data for polarization uses roll-call voting data on members of Congress over time [@jeffrey_b_lewis_voteview_2020], and data for trust in the military comes from Gallup public opinion data regarding the level of public trust and confidence in the military [@noauthor_confidence_2020].  
+
+```{r case2-polar-prep, include=FALSE, warning=FALSE, echo=FALSE}
+
+df_trust_polar_cs2 <- read_csv(here("data","polar-inst-trust-time.csv"))
+
+df_trust_polar_cs2 <- df_trust_polar_cs2 %>% filter(Year >= 2001) %>% select(-Congress) %>% 
+  mutate(
+    house_polar_dim1 = house_polar_dim1 *100,
+    sen_polar_dim1 = sen_polar_dim1 *100,
+    ) %>% pivot_longer(Military:sen_polar_dim1, names_to = "value", values_to = "Score") %>% distinct()
+```
+
+```{r case2-polar, include=T, warning=FALSE, echo=F, message=F, fig.height=4, fig.width=6, fig.cap = "Public Trust (L) and Polarization (R), 2001-2021" }
+df_trust_polar_cs2 %>% ggplot(aes(x=Year, y=Score, color=value)) + geom_line() + geom_point(size=0.7) + labs(x="Year", y="Trust in Institutions") + scale_color_discrete(name="Trust/\nPolarization",
+                         breaks=c("Military", "house_polar_dim1", "sen_polar_dim1"),
+                         labels=c("Trust in\nMilitary","House\nPolarization", "Senate\nPolarization")) + scale_y_continuous(sec.axis = sec_axis(~., name = "Polarization (Scaled)")) + scale_x_continuous(breaks=seq(2001, 2021, 2)) + theme(legend.position="bottom") + guides(color = guide_legend(ncol=3,nrow=2,byrow=TRUE))
+```
+
+Figure \@ref(case2-polar) shows that each variable, polarization and military prestige, has changed differently over the period from 2001-2021. With the exception of a few years, polarization levels in both the US House and Senate have consistently increased. The level of public trust in the military, on the other hand, has exhibited more variation between years. 
+
+For example, a relative spike in public trust occurred in 2003, perhaps reflecting a boost in patriotic fervor as the war in Iraq started the same year. Similarly, local minima occurred in 2007, perhaps coinciding with impatience over mounting US casualties in Iraq, and again in 2021, perhaps reflecting public frustration over the US withdrawal from Afghanistan. Yet even in the presence of this variability, the level of military prestige that has endured for the past twenty years is relatively high, and certainly higher than the level that existed in the late 1970s and early 1980s after the Vietnam War. Since data has been kept, for example, the lowest recorded level of trust in the military occurred in 1981, when only 50% of surveyed Americans said they trusted the military a "great deal or quite a lot" [@noauthor_confidence_2020]. In short, the period 2001 - 2021 reflects a domestic environment in which the level of military prestige remains relatively high, but in which the level of polarization increases. 
+
+Note, however, that Figure \@ref(case2-polar) does not, and indeed cannot, definitively conclude when the shift from a relatively moderate to relatively high level of polarization occurred. What we do see, however, is a fairly noteworthy spike in the level of polarization in the US House (red line) beginning in 2011, and that this spike was accompanied by a smaller yet still detectable spike in polarization in the US Senate (blue line) the same year. Furthermore, we know that this occurred midway through the first term of President Barack Obama. 
+
+From a methodological standpoint, then, the analysis which follows takes the year 2011 as a sort of natural breaking point. I begin by describing several political behaviors involving the military that occurred prior to 2011, and then shift to examining several that occurred after 2011. I then compare and contrast these behaviors, and explain how rising polarization shaped those behaviors that occurred in the second half of the period. 
+
+\singlespace
+# Part 1 - The War in Iraq and The Revolt of the Generals, 2004 - 2006
+\doublespace
+
+I briefly noted the "Revolt of the Generals" in chapter 3. There, I mentioned that in 2006, several recently retired generals publicly criticized the wartime leadership of Secretary of Defense Donald Rumsfeld. In this section of the case study, I describe the "Revolt of the Generals" in greater detail, and explain the specific political behaviors engaged in by those retired officers who participated in this "revolt." I conclude this section of the case study by distilling those issues that were truly at stake in this particular flashpoint of US civil-military relations.  
+
+## Summary
+
+\singlespace
+# Part 2 - Domestic Unrest, Presidential Transition, and the Withdrawal from Afghanistan, 2020-2021
+\doublespace
+
+## Summary
+
+# Evaluation, Comparison and Contrast of Behaviors
+
+## The Role of Polarization
+
+## Alternate Explanations
+
+## Conclusion
+
+\pagebreak
