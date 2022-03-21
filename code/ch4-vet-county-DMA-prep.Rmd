@@ -1,0 +1,527 @@
+---
+title: "Data Cleaning"
+author: "Pete Erickson"
+date: "2/3/2022"
+output: pdf_document
+---
+
+```{r, include = FALSE, echo = FALSE}
+
+library("here")       # file paths
+library("tidyverse")  # workhorse package
+library("tidylog")
+library("kableExtra")
+library("knitr")
+library("ggdag")
+library("dagitty")
+library("gridExtra")
+library("broom")
+library("dplyr")
+library("reshape2")
+library("pacman")
+library("ggrepel")
+library("writexl")
+library("lme4")
+library("bucky")
+library("scales")
+library("stargazer")
+library("rstatix")
+library("brglm")
+library("margins")
+library("IRdisplay")
+library("texreg")
+library("cowplot")
+library("mice")
+library("miceadds")
+library("bookdown")
+library("sandwich")
+library("mitools")
+library("modelsummary")
+library("rgdal")
+library("tidycensus")
+library("tidyverse")
+library("lubridate")
+
+```
+
+
+```{r county population data, include=F, echo=F}
+
+# county pop option 1:  load Census Bureau Key
+
+census_api_key("34e35aa27c6b12b5985839d07f820c27b9dcc41e", install=TRUE, overwrite = T)
+readRenviron("~/.Renviron")
+
+# available variables
+v00 <- load_variables(2000, "sf1") %>% view()
+v05 <- load_variables(2005, "acs1") %>% view()
+
+# store county population data by year
+## Now an "sf" object; can pass to GG Plot.  See tutorials. 
+cty_pop_00 <- get_decennial(geography = "county", variables="P001001", year=2000, geometry = T) %>% view()
+
+cty_pop_05 <- get_acs(geography ="county", variables=c(population="B01003_001"), year=2005)
+
+
+
+
+## county pop option 2: Census Data Sets
+
+# county population through 2008
+county_pop_thru_08 <- read_csv(here("data", "co-est2009-alldata.csv")) %>% select(COUNTY:CTYNAME,  ESTIMATESBASE2000, POPESTIMATE2004, POPESTIMATE2008)
+county_pop_thru_08 <- transform(county_pop_thru_08, CTYNAME=sub("LaSalle", "La Salle", CTYNAME))
+county_pop_thru_08 <- transform(county_pop_thru_08, CTYNAME=sub("Petersburg Census Area", "Petersburg Borough", CTYNAME))
+county_pop_thru_08 <- county_pop_thru_08 %>% 
+  filter(!str_detect(CTYNAME, "Bedford city"))
+
+# change name of 'Shannon' County, SD to 'Oglala Lakota' County, SD
+county_pop_thru_08 <- county_pop_thru_08 %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="South Dakota" & CTYNAME=="Shannon County"), "Oglala Lakota County", CTYNAME)) %>% mutate(
+  COUNTY=if_else(
+    CTYNAME=="Oglala Lakota County", "102", COUNTY))
+
+# county population through 2016
+county_pop_thru_16 <- read_csv(here("data", "co-est2020.csv")) %>% select(COUNTY:CTYNAME, POPESTIMATE2012, POPESTIMATE2016)
+county_pop_thru_16 <- transform(county_pop_thru_16, CTYNAME=sub("LaSalle", "La Salle", CTYNAME))
+
+#combine rows and columns for Chugach and Copper River, AK,  County ID codes?
+county_pop_thru_16 <- transform(county_pop_thru_16, CTYNAME=sub("Copper River", "Valdez-Cordova", CTYNAME))
+county_pop_thru_16 <- transform(county_pop_thru_16, CTYNAME=sub("Chugach", "Valdez-Cordova", CTYNAME))
+county_pop_thru_16 <- transform(county_pop_thru_16, CTYNAME=sub("Kusilvak", "Wade Hampton", CTYNAME))
+county_pop_thru_16 <- county_pop_thru_16 %>% group_by(CTYNAME, STNAME) %>% summarize(POPESTIMATE2012=sum(POPESTIMATE2012, na.rm=T), POPESTIMATE2016=sum(POPESTIMATE2016, na.rm=T)) %>% view()
+
+# join county population dfs 
+county_pop <- full_join(county_pop_thru_08, county_pop_thru_16)
+
+county_pop <- transform(county_pop, CTYNAME = gsub(" County", "", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub(" city", " City", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub("St. ", "Saint ", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub(" Borough", "", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub(" Census Area", "", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub(" Municipality", "", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub(" City and Borough", "", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub(" Parish", "", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub("Ste. ", "Sainte ", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub("Wade Hampton", "Kusilvak", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub("De Witt", "Dewitt", CTYNAME))
+county_pop <- transform(county_pop, CTYNAME = gsub("De Soto", "Desoto", CTYNAME))
+
+county_pop <- county_pop %>% filter(COUNTY != '000')
+county_pop <- county_pop %>% select(COUNTY, CTYNAME, STNAME, ESTIMATESBASE2000:POPESTIMATE2016) %>% rename(CTYID=COUNTY) 
+
+## make abbreviations for 50 states
+st_crosswalk <- tibble(state = state.name) %>%
+   bind_cols(tibble(abb = state.abb)) %>% 
+   bind_rows(tibble(state = "District of Columbia", abb = "DC")) %>% rename(STNAME=state, STABB=abb) 
+
+county_pop <- full_join(county_pop, st_crosswalk, by = "STNAME")
+
+
+# rename state abbreviation variable
+county_pop <- county_pop %>% select(CTYID, CTYNAME, STABB, STNAME:POPESTIMATE2016) %>% select(-STNAME) %>% rename (STNAME=STABB)
+
+county_pop <- transform(county_pop, CTYNAME = sub("\xfc\xbe\x8c\x96\x98\xbc", "n", CTYNAME))
+
+county_pop <- mutate(county_pop, across(where(is.character), .fns = toupper))
+county_pop <- transform(county_pop, CTYNAME = gsub(" CITY AND", "", CTYNAME))
+
+# intermediate county_pop df in the line below
+county_pop %>% view()
+```
+
+```{r county veteran population}
+# read in 2018 veteran pop (numbers) by county and clean data
+vetpop_county <- read_csv(here("data", "VetPop2018_County.csv")) 
+vetpop_county <- vetpop_county[-c(1:6), ] %>% select(1:3) 
+colnames(vetpop_county) <- c("CTYID","CTYSTATE", "Vet_Pop_18")
+vetpop_county <- vetpop_county %>% separate(CTYSTATE, into=c("CTYNAME", "STNAME"), sep='[,]') %>% filter(!is.na(CTYNAME)) %>% rename(VETCTYID=CTYID) %>% select(-VETCTYID)
+
+vetpop_county <- mutate(vetpop_county, across(where(is.character), .fns = toupper))
+vetpop_county <- transform(vetpop_county, CTYNAME = gsub("ST. ", "SAINT ", CTYNAME))
+vetpop_county <- transform(vetpop_county, CTYNAME = sub("BUENA VISAINT", "BUENA VISTA", CTYNAME))
+vetpop_county <- transform(vetpop_county, CTYNAME = sub("LASALLE", "LA SALLE", CTYNAME))
+
+## remove non 50 State counties and territories
+vetpop_county <- vetpop_county %>% 
+  filter(!str_detect(CTYNAME, "PUERTO RICO")) %>% filter(!str_detect(CTYNAME, "AMERICAN SAMOA")) %>% filter(!str_detect(CTYNAME, "GUAM")) %>% filter(!str_detect(CTYNAME, "NORTHERN MARIANA ISLANDS")) %>% filter(!str_detect(CTYNAME, "VIRGIN ISLANDS")) %>% filter(!str_detect(CTYNAME, "FOREIGN COUNTRIES"))
+
+
+# join county population df with veteran county population
+vet_cty_pop <- full_join(county_pop, vetpop_county, by= c("CTYNAME", "STNAME")) %>% view()
+
+# now check for NA values
+vet_cty_pop_na <- vet_cty_pop[rowSums(is.na(vet_cty_pop)) > 0, ] %>% view()
+
+
+# No longer needed #vet_cty_pop %>% mutate_at(c(4:9), as.numeric) %>% view()
+
+```
+ 
+ 
+```{r GWOT Casualties} 
+
+## read in casualty data from separate csv file
+
+OEF_cas <- read_csv(here("data", "OEFcasualties.csv")) %>% select(Name, Death_Date, HORCity:HORCountry) 
+OFS_cas <- read_csv(here("data", "OFScasualties.csv")) %>% select(Name, Death_Date, HORCity:HORCountry)
+OIF_cas <- read_csv(here("data", "OIFcasualties.csv")) %>% select(Name, Death_Date, HORCity:HORCountry)
+OND_cas <- read_csv(here("data", "ONDcasualties.csv")) %>% select(Name, Death_Date, HORCity:HORCountry)
+OIR_cas <- read_csv(here("data", "OIRcasualties.csv")) %>% select(Name, Death_Date, HORCity:HORCountry)
+
+## bind rows to have one consolidated list of GWOT casualties
+GWOT_Cas <- bind_rows(OEF_cas, OFS_cas, OIF_cas, OND_cas, OIR_cas) %>% view()
+
+# change the Death_Date variable to class Lubridate
+GWOT_Cas <- GWOT_Cas %>% mutate(
+  Death_Date=lubridate::ymd(Death_Date)
+) %>% view()
+
+# count NA values for HOW County - 833
+sum(is.na(GWOT_Cas$HORCounty))
+
+## store each distinct occurrence of a missing county - 710 times in the data
+GWOT_CAS_missing_counties <- GWOT_Cas %>% filter(is.na(HORCounty)) %>%  select(HORState, HORCity) %>% distinct() 
+
+## write to an excel file for further research and investigation
+GWOT_CAS_missing_counties %>% write_xlsx(here("data", "GWOT_missing_counties.xlsx"))
+## I spend 7-10 hours on the above information, mainly googling towns and states
+
+## read in missing counties file; drop columns 4 and 5
+GWOT_Cas_county_info <- read_csv(here("data", "GWOT_missing_counties_edits.csv")) %>% select(-...4, -...5) %>% rename(County_Edit=COUNTY)
+GWOT_Cas_county_info <- mutate(GWOT_Cas_county_info, across(where(is.character), .fns = toupper))
+
+## full join using by HORState and HORCity
+
+GWOT_Cas_Complete <- full_join(GWOT_Cas, GWOT_Cas_county_info, by= c("HORState", "HORCity"))
+
+# Now, find rows with an NA value and replace that value with the new value for county
+GWOT_Cas_Complete <- GWOT_Cas_Complete %>% mutate(
+  HORCounty=if_else(is.na(HORCounty), County_Edit, HORCounty)
+) %>% view()
+
+# Then Drop all casualties from areas you don't need 
+GWOT_Cas_Complete <- GWOT_Cas_Complete %>% filter(!HORState %in% c('AS', 'GU', 'NB', 'PR', 'MP', 'VI','PR'), !is.na(HORState)) 
+
+
+
+# filter for all casualty dates that occurred up until the date of the 2016 Election 
+# and drop the 'County_edit' variable
+
+GWOT_Cas_Complete <- GWOT_Cas_Complete %>% filter(Death_Date<=as.Date("2016-11-08")) %>% select(-County_Edit)
+
+## create election intervals
+### first date is day after previous POTUS election
+### second date is day of that year's POTUS election
+int04 <- interval(ymd("2000-11-08"), ymd("2004-11-02"))
+int08 <- interval(ymd("2004-11-03"), ymd("2008-11-04"))
+int12 <- interval(ymd("2008-11-05"), ymd("2012-11-06"))
+int16 <- interval(ymd("2012-11-07"), ymd("2016-11-08"))
+int20 <-interval(ymd("2016-11-08"), ymd("2020-11-03"))
+
+# create a variable for which election interval a casualty date falls in
+GWOT_Cas_Complete_join<- GWOT_Cas_Complete %>% mutate(
+  ElecYrDeath = case_when(
+  Death_Date %within% int04 ~ 2004, 
+  Death_Date %within% int08 ~ 2008, 
+  Death_Date %within% int12 ~ 2012, 
+  Death_Date %within% int16 ~ 2016,
+  Death_Date %within% int20 ~ 2020
+    )
+  ) %>% view()
+
+
+```
+
+
+```{r dma county crosswalk}
+# read in counties by DMA
+county_DMA <- read_csv(here("data", "usa-tvdma-county.csv")) %>% select(-Internal_State_Region, -Metro_Grp, -Metropolitan_Statistical_Areas, -STATE) %>% rename(STNAME=STATE_AB, CTYNAME=COUNTY) 
+
+# cleaning county_DMA df for full_joining purposes
+county_DMA <- transform(county_DMA, CTYNAME = gsub("DE KALB", "DEKALB", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST CLAIR", "SAINT CLAIR", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BOR. 1", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" C.A. 2", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BOR. 3", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" C.A. 4", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BOR. 5", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BOR. 6", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" C.A. 7", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" NO.STAR BOR8.", " NORTH STAR", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BOR. 9", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("JUNEAU0", "JUNEAU", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("PENINSULA1", "PENINSULA", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" B1O2", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" ISLAND3", " ISLAND", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BOR14", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("& PENINSULA", "AND PENINSULA", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" B1O5", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" C.A. 16", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("SLOPE7", "SLOPE", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BO1R8.", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BOR. 20", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("SKAGWAY-HOO.-ANG.C.A21", "SKAGWAY", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" FRBKS. C.A 22", " FAIRBANKS", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("CORDOVA3", "CORDOVA", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("DE WITT", "DEWITT", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("DU PAGE", "DUPAGE", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("LA PORTE", "LAPORTE", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("O BRIEN", "O'BRIEN", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("DE SOTO", "DESOTO", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST FRANCIS", "SAINT FRANCIS", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST. JOHNS", "SAINT JOHNS", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST. LUCIE", "SAINT LUCIE", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST JOSEPH", "SAINT JOSEPH", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST BERNARD", "SAINT BERNARD", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST CHARLES", "SAINT CHARLES", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST HELENA", "SAINT HELENA", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST JAMES", "SAINT JAMES", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST JOHN THE BAP", "SAINT JOHN THE BAPTIST", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST LANDRY", "SAINT LANDRY", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST MARTIN", "SAINT MARTIN", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST MARY", "SAINT MARY", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST TAMMANY", "SAINT TAMMANY", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("PRINCE GEORGES", "PRINCE GEORGE'S", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("QUEEN ANNES", "QUEEN ANNE'S", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST MARYS", "SAINT MARY'S", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("SAINT MARYS", "SAINT MARY'S", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("LAKE OF WOODS", "LAKE OF THE WOODS", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST LOUIS", "SAINT LOUIS", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST LAWRENCE", "SAINT LAWRENCE", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("STE GENEVIEVE", "SAINTE GENEVIEVE", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("LA MOURE", "LAMOURE", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST FRANCOIS", "SAINT FRANCOIS", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("ST CROIX", "SAINT CROIX", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("BEDFORD CITY", "BEDFORD", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("YUKON-KOYUKUK7", "YUKON-KOYUKUK", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub(" BOR. 26", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("-PETERS. C.A25", "", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = gsub("WADE HAMPTON4", "KUSILVAK", CTYNAME))
+county_DMA <- transform(county_DMA, CTYNAME = sub("PR.WALES-OUT.KET.C.A 19", "PRINCE OF WALES-HYDER", CTYNAME))
+
+
+## change some specific counties in specific states, MOSTLY VA
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="SD" & CTYNAME=="SHANNON"), "OGLALA LAKOTA", CTYNAME)) 
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="FL" & CTYNAME=="DADE"), "MIAMI-DADE", CTYNAME)) 
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="ALEXANDRIA"), "ALEXANDRIA CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="BRISTOL"), "BRISTOL CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="BUENA VISTA"), "BUENA VISTA CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="CHARLOTTESVILLE"), "CHARLOTTESVILLE CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="CHESAPEAKE"), "CHESAPEAKE CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="COLONIAL HEIGHTS"), "COLONIAL HEIGHTS CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="COVINGTON"), "COVINGTON CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="DANVILLE"), "DANVILLE CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="EMPORIA"), "EMPORIA CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="FALLS CHURCH"), "FALLS CHURCH CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="FREDERICKSBURG"), "FREDERICKSBURG CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="HAMPTON"), "HAMPTON CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="HARRISONBURG"), "HARRISONBURG CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="HOPEWELL"), "HOPEWELL CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="LEXINGTON"), "LEXINGTON CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="LYNCHBURG"), "LYNCHBURG CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="MANASSAS"), "MANASSAS CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="MANASSAS PARK"), "MANASSAS PARK CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="MARTINSVILLE"), "MARTINSVILLE CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="NEWPORT NEWS"), "NEWPORT NEWS CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="NORFOLK"), "NORFOLK CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="NORTON"), "NORTON CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="PETERSBURG"), "PETERSBURG CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="POQUOSON"), "POQUOSON CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="PORTSMOUTH"), "PORTSMOUTH CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="RADFORD"), "RADFORD CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="SALEM"), "SALEM CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="SOUTH BOSTON"), "SOUTH BOSTON CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="STAUNTON"), "STAUNTON CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="SUFFOLK"), "SUFFOLK CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="VIRGINIA BEACH"), "VIRGINIA BEACH CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="WAYNESBORO"), "WAYNESBORO CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="WILLIAMSBURG"), "WILLIAMSBURG CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="WINCHESTER"), "WINCHESTER CITY", CTYNAME))
+county_DMA <- county_DMA %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="VA" & CTYNAME=="GALAX"), "GALAX CITY", CTYNAME))
+
+
+### Join Data Sets
+
+vet_county_DMA <- full_join(vet_cty_pop, county_DMA, by= c("STNAME", "CTYNAME"))
+
+# Then Drop counties you don't need or are a non-match
+vet_county_DMA <- vet_county_DMA %>% filter(!STNAME %in% c('STATE_AB')) %>% filter(!CTYNAME %in% c("SOUTH BOSTON CITY", "CLIFTON FORGE"))
+
+# use mutate-else to replace missing DMA values for six counties. 
+vet_county_DMA <- vet_county_DMA %>% mutate(
+  TVDMA=if_else(
+    (STNAME=="AK" & CTYNAME=="HOONAH-ANGOON"), "Juneau, AK DMA", TVDMA))
+vet_county_DMA <- vet_county_DMA %>% mutate(
+  TVDMA=if_else(
+    (STNAME=="AK" & CTYNAME=="PETERSBURG"), "Juneau, AK DMA", TVDMA))
+vet_county_DMA <- vet_county_DMA %>% mutate(
+  TVDMA=if_else(
+    (STNAME=="CO" & CTYNAME=="BROOMFIELD"), "Denver, CO - NE - NV - WY DMA", TVDMA))
+vet_county_DMA <- vet_county_DMA %>% mutate(
+  TVDMA=if_else(
+    (STNAME=="DC" & CTYNAME=="DISTRICT OF COLUMBIA"), "Washington, DC - MD - PA - VA - WV DMA", TVDMA))
+vet_county_DMA <- vet_county_DMA %>% mutate(
+  TVDMA=if_else(
+    (STNAME=="HI" & CTYNAME=="KALAWAO"), "Honolulu, HI DMA", TVDMA))
+
+vet_county_DMA_join <- vet_county_DMA %>% mutate(
+  TVDMA=if_else(
+    (STNAME=="ND" & CTYNAME=="WILLIAMS"), "Fargo - Valley City, ND - MN DMA", TVDMA))
+
+### this is good, but I picked up two extra counties.  Not sure why! Come back to this. 
+
+#Now do some stats. Calculate the total pop and vet pop of each DMA. 
+vet_county_DMA_stats <- vet_county_DMA_join %>% select(TVDMA, POPESTIMATE2016, Vet_Pop_18) %>% arrange(TVDMA) %>% view()
+
+class(vet_county_DMA_stats$Vet_Pop_18)
+class(vet_county_DMA_stats$POPESTIMATE2016)
+
+# remove commas from Vet_Pop_18
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, Vet_Pop_18 = gsub(",", "", Vet_Pop_18)) %>% view()
+
+vet_county_DMA_stats$Vet_Pop_18 <- as.numeric(vet_county_DMA_stats$Vet_Pop_18)
+class(vet_county_DMA_stats$Vet_Pop_18)
+
+# change Vet_Pop_18 to numerical variable
+#vet_county_DMA_stats<- vet_county_DMA_stats %>% 
+#  mutate(
+#    Vet_Pop_18 <- as.numeric(Vet_Pop_18)) %>% view()
+
+
+vet_county_DMA_stats <- vet_county_DMA_stats %>% group_by(TVDMA) %>%
+  mutate(
+    total_pop=sum(POPESTIMATE2016), 
+    total_vet=sum(Vet_Pop_18),
+    percent_vet=total_vet/total_pop
+    ) %>% view()
+#remove the word 'DMA' from the TVDMA variable for easier cleaning
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub(" DMA", "", TVDMA)) 
+
+# make the DMAs easier to read/understand
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub(", NY - MA - VT", "", TVDMA)) 
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub(", NM - AZ - CO", "", TVDMA)) 
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub("Amarillo, TX -NM - OK", "Amarillo, TX", TVDMA))
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub(" - AL - NC", "", TVDMA)) 
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub(", WV - VA", "", TVDMA))
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub("Cedar Rapids - Waterloo&Dubuque", "Cedar Rapids - Waterloo", TVDMA))
+vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub(" - And., NC - GA", "", TVDMA))
+
+
+##vet_county_DMA_stats <- transform(vet_county_DMA_stats, TVDMA = gsub("Syracuse, NY*", "Syracuse, NY", TVDMA))
+## Utica, Ny also has this problem/issue
+
+vet_county_DMA_stats2 <- transform(vet_county_DMA_stats, TVDMA = gsub("Lufkin", "", TVDMA))
+vet_county_DMA_stats2 <- transform(vet_county_DMA_stats2, TVDMA = gsub("Nacogdoches", "", TVDMA))
+vet_county_DMA_stats2 <- transform(vet_county_DMA_stats2, TVDMA = gsub("[()&]", "", TVDMA))
+vet_county_DMA_stats2 <- transform(vet_county_DMA_stats2, TVDMA = gsub("[*]", "", TVDMA))
+
+vet_county_DMA_final <- vet_county_DMA_stats2 %>% select(TVDMA, percent_vet)%>%  group_by(TVDMA) %>% distinct() %>% view()
+vet_county_DMA_final <- mutate(vet_county_DMA_final, across(where(is.character), .fns = toupper)) %>% view()
+
+
+
+
+vet_county_DMA_final %>% write_xlsx(here("data", "vet_county_DMA_final.xlsx"))
+
+```
+
+
+
+```{r GWOT_Cas_DMA}
+# Now I want to obtain a count of GWOT Casualties by Counties and by DMA, and #ultimately, to add that back to the vet_county_DMA df. The two files I am working with as a start point are GWOT_Cas_Complete_join and vet_county_DMA_join
+
+#Will call the resulting DF something like vet_county_GWOT_DMA. 
+
+# First, the goal is to assign a DMA to every GWOT Casualty.
+# 1a. Pick the variables I need to join from the first df. 
+
+vet_county_DMA_join_interim <- vet_county_DMA_join %>% select(CTYNAME, STNAME, TVDMA)
+
+#1b. Do the same for the GWOT file. Rename HORCounty to CTYNAME and HORState to STNAME
+
+GWOT_Cas_interim <- GWOT_Cas_Complete %>% rename(STNAME=HORState, CTYNAME=HORCounty)
+
+#1b. Heavy Data Cleaning Here. 
+
+GWOT_Cas_interim <- GWOT_Cas_interim %>% mutate(
+  CTYNAME=if_else(
+    (STNAME=="FL" & CTYNAME=="DADE"), "MIAMI-DADE", CTYNAME)) 
+
+GWOT_Cas_DMA_interim <- full_join(GWOT_Cas_interim, vet_county_DMA_join_interim, by= c("STNAME", "CTYNAME"))
+
+```

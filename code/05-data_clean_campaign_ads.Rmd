@@ -1164,118 +1164,23 @@ ch4_airings_DMA_vet_pop %>% write_csv(here("data", "ads_airings_mkt_vet_pop.csv"
 
 ```{r airings analysis}
 
-# First read in airings df.  Capitalize. Make an airing-Year variable and assign
-# values of independent variables here. 
-
-ch4_airings_master <- read_csv(here("data", "ads_airings_mkt_vet_pop.csv")) 
-ch4_airings_master <- mutate(ch4_airings_master, across(where(is.character), .fns = toupper))
-ch4_airings_master <- ch4_airings_master %>% mutate(
-  Airing_Yr = year(date),
-  house_polar = case_when(
-    Airing_Yr== 2000 ~ 77.713,
-    Airing_Yr == 2003 ~ 79.302,
-    Airing_Yr == 2004 ~ 79.302,
-    Airing_Yr == 2007 ~ 80.765,
-    Airing_Yr == 2008 ~ 80.765,
-    Airing_Yr == 2011 ~ 86.142,
-    Airing_Yr == 2012 ~ 86.142,
-    Airing_Yr == 2015 ~ 87.639,
-    Airing_Yr == 2016 ~ 87.639,
-    ),
-  sen_polar = case_when(
-    Airing_Yr== 2000 ~ 65.833,
-    Airing_Yr == 2003 ~ 64.984,
-    Airing_Yr == 2004 ~ 64.984,
-    Airing_Yr == 2007 ~ 68.736,
-    Airing_Yr == 2008 ~ 68.736,
-    Airing_Yr == 2011 ~ 74.383,
-    Airing_Yr == 2012 ~ 74.383,
-    Airing_Yr == 2015 ~ 81.293,
-    Airing_Yr == 2016 ~ 81.293,
-  ),
-  aff_polar = case_when(
-    Airing_Yr== 2000 ~ 61.692,
-    Airing_Yr == 2003  ~ 69.27,
-    Airing_Yr == 2004  ~ 69.27,
-    Airing_Yr == 2007 ~ 69.519,
-    Airing_Yr == 2008 ~ 69.519,
-    Airing_Yr == 2011 ~ 84.689,
-    Airing_Yr == 2012 ~ 84.689,
-    Airing_Yr == 2015 ~ 67.754,
-    Airing_Yr == 2016 ~ 67.754,
-  ),
-  HostCasRate = case_when(
-    Airing_Yr == 2000 ~ 1.23874924,
-    Airing_Yr == 2003 ~ 21.92014883,
-    Airing_Yr == 2004 ~ 52.0801226,
-    Airing_Yr == 2007 ~ 61.97806503,
-    Airing_Yr == 2008 ~ 25.1029256,
-    Airing_Yr == 2011 ~ 31.31,
-    Airing_Yr == 2012 ~ 21.4917871,
-    Airing_Yr == 2015 ~ 1.750,
-    Airing_Yr == 2016 ~ 1.229532,
-  ),
-  HostCasRateLagged = case_when(
-    Airing_Yr == 2000 ~ 0,
-    Airing_Yr == 2003 ~ 1.20,
-    Airing_Yr == 2004 ~ 21.92014883,
-    Airing_Yr == 2007 ~ 56.07,
-    Airing_Yr == 2008 ~ 61.97806503,
-    Airing_Yr == 2011 ~ 31.866,
-    Airing_Yr == 2012 ~ 31.31,
-    Airing_Yr == 2015 ~ 4.034,
-    Airing_Yr == 2016 ~ 1.750,
-  ),
-  mil_prestige = case_when(
-    Airing_Yr == 2000 ~ 64,
-    Airing_Yr == 2003 ~ 82,
-    Airing_Yr == 2004 ~ 75,
-    Airing_Yr == 2007 ~ 69,
-    Airing_Yr == 2008 ~ 71,
-    Airing_Yr == 2011 ~ 78,
-    Airing_Yr == 2012 ~ 75,
-    Airing_Yr == 2015 ~ 72,
-    Airing_Yr == 2016 ~ 73,
-  ), 
-  cong_prestige = case_when(
-    Airing_Yr == 2000 ~ 24,
-    Airing_Yr == 2003 ~ 29,
-    Airing_Yr == 2004 ~ 30,
-    Airing_Yr == 2007 ~ 14,
-    Airing_Yr == 2008 ~ 12,
-    Airing_Yr == 2011 ~ 12,
-    Airing_Yr == 2012 ~ 73,
-    Airing_Yr == 2015 ~ 8,
-    Airing_Yr == 2016 ~ 9
-  ),
-  prty_ofc = case_when(      ## assigns 1 if party in office at start of year was D, and 0 if R
-    Airing_Yr == 2000 ~ 1,
-    Airing_Yr == 2003 ~ 0,
-    Airing_Yr == 2004 ~ 0,
-    Airing_Yr == 2007 ~ 0,
-    Airing_Yr == 2008 ~ 0,
-    Airing_Yr == 2011 ~ 1,
-    Airing_Yr == 2012 ~ 1,
-    Airing_Yr == 2015 ~ 1,
-    Airing_Yr == 2016 ~ 1,
-  ),
-  prestige_gap = mil_prestige-cong_prestige
-)
-table(list(ch4_airings_master$Airing_Yr))
-table(list(ch4_airings_master$house_polar))
-
-
 ### create intervals to separate primary vs general election ads, and then 
-### create a primary variable that equals ==1 or 0.
-### first date is Jan 1 of year before an election; second date is end of primary contest
-### as per wikipedia
+### first date is Jan 1 of year before an election; 
+###second date is end of primary contest as per wikipedia
 pri_00 <- interval(ymd("2000-01-01"), ymd("2000-06-06"))
 pri_04 <- interval(ymd("2003-01-01"), ymd("2004-06-08"))
 pri_08 <- interval(ymd("2007-01-01"), ymd("2008-06-03"))
 pri_12 <- interval(ymd("2011-01-01"), ymd("2012-06-05"))
 pri_16 <- interval(ymd("2015-01-01"), ymd("2016-06-07"))
 
+# First read in airings df.  Capitalize. Make an airing-Year variable and assign
+# values of independent variables here. 
+
+ch4_airings_master <- read_csv(here("data", "ads_airings_mkt_vet_pop.csv")) 
+ch4_airings_master <- mutate(ch4_airings_master, across(where(is.character), .fns = toupper))
+
 ch4_airings_master <- ch4_airings_master %>% mutate(
+  Airing_Yr = year(date),
   primary = case_when(
     date %within% pri_00 ~ 1,
     date %within% pri_04 ~ 1,
@@ -1284,7 +1189,121 @@ ch4_airings_master <- ch4_airings_master %>% mutate(
     date %within% pri_16 ~ 1,
   )) %>% mutate(
     primary = ifelse(is.na(primary), 0, primary)
-  )
+  ) 
+
+### Create an "Election Cycle - Campaign" Variable, i.e. "2000-Primary"
+### Election Cycle - Primary take on the previous years values for 
+### Polarization, Mil. Prestige, and Casualty Levels. 
+### For example, 2004-PRI takes on 2003 levels for polar., prestige, casualty levels.
+ch4_airings_master <- ch4_airings_master %>% mutate(
+  Elec_Cycle_Camp = case_when(
+    (Elec_Cycle == 2000 & primary ==1) ~ "2000PRI",
+    (Elec_Cycle == 2000 & primary ==0) ~ "2000GEN",
+    (Elec_Cycle == 2004 & primary ==1) ~ "2004PRI",
+    (Elec_Cycle == 2004 & primary ==0) ~ "2004GEN",
+    (Elec_Cycle == 2008 & primary ==1) ~ "2008PRI",
+    (Elec_Cycle == 2008 & primary ==0) ~ "2008GEN",
+    (Elec_Cycle == 2012 & primary ==1) ~ "2012PRI",
+    (Elec_Cycle == 2012 & primary ==0) ~ "2012GEN",
+    (Elec_Cycle == 2016 & primary ==1) ~ "2016PRI",
+    (Elec_Cycle == 2016 & primary ==0) ~ "2016GEN"
+  ))
+
+### Create Variables for House/Senate/Affective Polarization,
+### Military Prestige, and Casualty Levels Based on
+### --- and this is key --- 
+### Election Cycle - Campaign (Primary vs General)
+  
+  ch4_airings_master <- ch4_airings_master %>% mutate(
+  house_polar = case_when(
+    Elec_Cycle_Camp== "2000PRI" ~ 77.713,
+    Elec_Cycle_Camp== "2000GEN" ~ 77.713,
+    Elec_Cycle_Camp== "2004PRI" ~ 79.302,
+    Elec_Cycle_Camp== "2004GEN" ~ 79.302,
+    Elec_Cycle_Camp== "2008PRI" ~ 80.765,
+    Elec_Cycle_Camp== "2008GEN" ~ 80.765,
+    Elec_Cycle_Camp== "2012PRI" ~ 86.142,
+    Elec_Cycle_Camp== "2012GEN" ~ 86.142,
+    Elec_Cycle_Camp== "2016PRI" ~ 87.639,
+    Elec_Cycle_Camp== "2016GEN" ~ 87.639,
+    ),
+  sen_polar = case_when(
+    Elec_Cycle_Camp== "2000PRI" ~ 65.833,
+    Elec_Cycle_Camp== "2000GEN" ~ 65.833,
+    Elec_Cycle_Camp== "2004PRI" ~ 64.984,
+    Elec_Cycle_Camp== "2004GEN" ~ 64.984,
+    Elec_Cycle_Camp== "2008PRI" ~ 68.736,
+    Elec_Cycle_Camp== "2008GEN" ~ 68.736,
+    Elec_Cycle_Camp== "2012PRI" ~ 74.383,
+    Elec_Cycle_Camp== "2012GEN" ~ 74.383,
+    Elec_Cycle_Camp== "2016PRI" ~ 81.293,
+    Elec_Cycle_Camp== "2016GEN" ~ 81.293,
+  ),
+  aff_polar = case_when(
+    Elec_Cycle_Camp== "2000PRI" ~ 61.692,
+    Elec_Cycle_Camp== "2000GEN" ~ 61.692,
+    Elec_Cycle_Camp== "2004PRI" ~ 69.27,
+    Elec_Cycle_Camp== "2004GEN" ~ 69.27,
+    Elec_Cycle_Camp== "2008PRI" ~ 69.519,
+    Elec_Cycle_Camp== "2008GEN" ~ 69.519,
+    Elec_Cycle_Camp== "2012PRI" ~ 84.689,
+    Elec_Cycle_Camp== "2012GEN" ~ 84.689,
+    Elec_Cycle_Camp== "2016PRI" ~ 67.754,
+    Elec_Cycle_Camp== "2016GEN" ~ 67.754,
+  ),
+  HostCasRate = case_when(
+    Elec_Cycle_Camp== "2000PRI" ~ 1.23874924,
+    Elec_Cycle_Camp== "2000GEN" ~ 1.23874924,
+    Elec_Cycle_Camp== "2004PRI" ~ 21.92014883,
+    Elec_Cycle_Camp== "2004GEN" ~ 52.0801226,
+    Elec_Cycle_Camp== "2008PRI" ~ 61.97806503,
+    Elec_Cycle_Camp== "2008GEN" ~ 25.1029256,
+    Elec_Cycle_Camp== "2012PRI" ~ 31.31,
+    Elec_Cycle_Camp== "2012GEN" ~ 21.4917871,
+    Elec_Cycle_Camp== "2016PRI" ~ 1.750,
+    Elec_Cycle_Camp== "2016GEN" ~ 1.229532,
+  ),
+  HostCasRateLagged = case_when(
+    Elec_Cycle_Camp== "2000PRI" ~ 0,
+    Elec_Cycle_Camp== "2000GEN" ~ 0,
+    Elec_Cycle_Camp== "2004PRI" ~ 1.20,
+    Elec_Cycle_Camp== "2004GEN" ~ 21.92014883,
+    Elec_Cycle_Camp== "2008PRI" ~ 56.07,
+    Elec_Cycle_Camp== "2008GEN" ~ 61.97806503,
+    Elec_Cycle_Camp== "2012PRI" ~ 31.866,
+    Elec_Cycle_Camp== "2012GEN" ~ 31.31,
+    Elec_Cycle_Camp== "2016PRI" ~ 4.034,
+    Elec_Cycle_Camp== "2016GEN" ~ 1.750,
+  ),
+  mil_prestige = case_when(
+    Elec_Cycle_Camp== "2000PRI" ~ 64,
+    Elec_Cycle_Camp== "2000GEN" ~ 64,
+    Elec_Cycle_Camp== "2004PRI" ~ 82,
+    Elec_Cycle_Camp== "2004GEN" ~ 75,
+    Elec_Cycle_Camp== "2008PRI" ~ 69,
+    Elec_Cycle_Camp== "2008GEN" ~ 71,
+    Elec_Cycle_Camp== "2012PRI" ~ 78,
+    Elec_Cycle_Camp== "2012GEN" ~ 75,
+    Elec_Cycle_Camp== "2016PRI" ~ 72,
+    Elec_Cycle_Camp== "2016GEN" ~ 73,
+  ), 
+  cong_prestige = case_when(
+    Elec_Cycle_Camp== "2000PRI" ~ 24,
+    Elec_Cycle_Camp== "2000GEN" ~ 24,
+    Elec_Cycle_Camp== "2004PRI" ~ 29,
+    Elec_Cycle_Camp== "2004GEN" ~ 30,
+    Elec_Cycle_Camp== "2008PRI" ~ 14,
+    Elec_Cycle_Camp== "2008GEN" ~ 12,
+    Elec_Cycle_Camp== "2012PRI" ~ 12,
+    Elec_Cycle_Camp== "2012GEN" ~ 13,
+    Elec_Cycle_Camp== "2016PRI" ~ 8,
+    Elec_Cycle_Camp== "2016GEN" ~ 9,
+  ),
+  prestige_gap = mil_prestige-cong_prestige
+)
+
+table(list(ch4_airings_master$mil_prestige))
+table(list(ch4_airings_master$house_polar))
 
 
 # Now read in commercial-level df.  Capitalize.     
@@ -1344,119 +1363,5 @@ ch4_POTUS_all_master <- full_join(ch4_airings_master, ch4_ads_master, by = c("El
 
 ch4_POTUS_all_master %>% write_csv(here("data", "ch4_POTUS_airings_master.csv"))
 ```
-
-
-```{r airings analysis for chapter 4}
-### The above chunk creates the "master" file.  Begin with the true analysis portion here. 
-
-ch4_airings_analysis <- read_csv(here("data", "ch4_POTUS_airings_master.csv")) %>% filter(missing_ad != 1) %>% select(-dma)
-
-# Make some new variables. 
-ch4_airings_analysis <- ch4_airings_analysis %>% mutate(
-    mil_img = case_when(
-    (vet_fam != 0) | (act_dty_img ==1 | vet_img ==1 | us_mil_hard_img ==1 | us_cmbt_img==1) ~ 1, 
-  (vet_fam == 0) & (act_dty_img ==0 & vet_img ==0 & us_mil_hard_img ==0 & us_cmbt_img==0) ~ 0
-),
-  no_mil_img = case_when(
-    (vet_fam != 1) & (act_dty_img !=1 & vet_img !=1 & us_mil_hard_img !=1 & us_cmbt_img!=1) ~ 1, 
-  (vet_fam != 0) | (act_dty_img ==1 | vet_img ==1 | us_mil_hard_img ==1 | us_cmbt_img==1) ~ 0
-  )
-    ) 
-
-# Drop NA values that are not matched up according to market, date, etc.
-# This drops about 35k viewings.  
-ch4_airings_analysis <- ch4_airings_analysis %>% drop_na()
-
-### we have a total of 4,531,041 viewings to analyze across 3,414 unique ads.  
-### This is pretty good. This should be viewed as a high percentage of a total of 
-### 4,544,150 viewings for which we have information on the ads that are shown and for 
-### which data is available.
-
-
-
-ch4_airings_analysis %>% filter(can_vet==1) %>% select(creative, Elec_Cycle) %>% distinct() %>% view()
-
-
-ch4_airings_analysis %>% filter(Elec_Cycle == 2016, party!= "DEMOCRAT", primary==1) %>% select(creative) %>% distinct() %>% view()
-
-ch4_airings_overall_slim %>% 
-  select_if(function(x) any(is.na(x))) %>% 
-  summarise_each(funs(sum(is.na(.)))) %>% view()
-
-# Let's start with some initial analysis.  What would be cool to find?
-# Perhaps the overall percentage of act_dty_img, vet_img, us_mil_hard_img, us_cmbt_img, mil_img, vet_fam, def_vet_ad_theme. 
-
-ch4_airings_overall_slim %>% group_by(Elec_Cycle) %>% summarize(prop_act_dty_img=mean(vet_img), prop_vet_img=mean(vet_img), prop_us_mil_hard_img=mean(us_mil_hard_img), prop_cmbt_img=mean(us_cmbt_img), prop_mil_img=mean(mil_img), prop_vet_fam=mean(vet_fam), prop_def_theme=mean(def_vet_ad_theme)) %>% arrange() %>% view()
-
-# create a character string that has the media market names of these top 50 media markets. 
-
-top_mkts_by_name <- c("LAS VEGAS, NV", "DENVER, CO", "CLEVELAND, OH", "TAMPA-SARASOTA, FL", "DES MOINES, IA-MO", "ORLANDO-DAYTONA BEACH, FL", "CEDAR RAPIDS, IA", "COLUMBUS, OH", "RENO, NV-CA", "CINCINATTI, OH", "WASHINGTON DC-MD-PA-VA-WV", "BOSTON, MA-NH", "NORFOLK, VA-NC", "TOLEDO, OH", "RICHMOND, VA", "DAVENPORT, IA-IL", "DAYTON, OH", "ROANOKE-LYNCHBURG, VA", "CHARLOTTE, NC", "COLORADO SPRINGS-PUEBLO, CO", "JACKSONVILLE, FL - BRUNSWICK, GA", "MIAMI-FORT LAUDERDALE, FL", "GRAND JUNCTION, CO", "WEST PALM BEACH, FL", "SIOUX CITY, IA-NE-SD", "FORT MEYERS-NAPLES, FL", "MILWAUKEE, WI", "RALEIGH-DURHAM, NC-VA", "YOUNGSTOWN, OH-PA", "GREEN BAY-APPLETON, WI", "GREENVILLE-SPARTANBURG, SC", "GREENSBORO-W.SALEM, NC", "HARRISBURG-LANCASTER, PA", "MADISON, WI", "PHILADELPHIA, PA-DE-NJ", "LACROSSE-EAU CLAIRE, WI", "GREENVILLE-NEW BERN-WASHINGTON, NC", "PITTSBURGH, PA-MD-WV", "GRAND RAPIDS-KALAMAZOO, MI", "ROCHESTER-MASON CITY, MN-IA", "BURLINGTON, VT", "WILKES BARRE-SCRANTON, PA", "ALBUQUERQUE-SANTA FE", "DETROIT, MI", "WAUSAU-RHINELANDER, WI", "CHARLOTTESVILLE, VA", "JOHNSTOWN-ALTOONA, PA", "PORTLAND-AUBURN, ME-NH-VT", "FLINT-SAGINAW, MI", "LANSING, MI")
-
-ch4_airings_analysis %>% filter(media_market %in% top_mkts_by_name) %>% group_by(media_market) %>% summarize(prop_act_dty_img=mean(vet_img), prop_vet_img=mean(vet_img), prop_us_mil_hard_img=mean(us_mil_hard_img), prop_cmbt_img=mean(us_cmbt_img), prop_mil_img=mean(mil_img), prop_vet_fam=mean(vet_fam), prop_def_theme=mean(def_vet_ad_theme)) %>% arrange() %>% view()
-
-
-mod1 <- glm(vet_img ~ percent_vet + house_polar + HostCasRateLagged + can_vet + party_reg + mil_prestige + can_vet_mention,
-             family=binomial(link="logit"),
-            data=ch4_airings_overall_slim
-)
-
-summary(mod1)
-
-
-
-
-
-# Let's start with the two most boring elections, 2008 and 2012 and identify the 50 most competitive media 
-# markets; that is, let's find out which media markets aired the most advertisements in each year and determine the range of ads that showed veteran, military imagery in each of these.  
-
-
-# Begin with 2008 and 2012 together.  
-
-# Identify which markets ran the most elections. 
-comp_mkts_08 <- ch4_airings_analysis %>% filter(!Elec_Cycle %in% c(2000, 2004, 2016))%>% group_by(media_market) %>% 
-  summarize(
-  count=n()
-) %>% arrange(count)
-
-
-# create a character string that has the media market names of these top 50 media markets. 
-top_mkts_by_name_08 <- c("LAS VEGAS, NV", "DENVER, CO", "CLEVELAND, OH", "TAMPA-SARASOTA, FL", "DES MOINES, IA-MO", "ORLANDO-DAYTONA BEACH, FL", "CEDAR RAPIDS, IA", "COLUMBUS, OH", "RENO, NV-CA", "CINCINATTI, OH", "WASHINGTON DC-MD-PA-VA-WV", "BOSTON, MA-NH", "NORFOLK, VA-NC", "TOLEDO, OH", "RICHMOND, VA", "DAVENPORT, IA-IL", "DAYTON, OH", "ROANOKE-LYNCHBURG, VA", "CHARLOTTE, NC", "COLORADO SPRINGS-PUEBLO, CO", "JACKSONVILLE, FL - BRUNSWICK, GA", "MIAMI-FORT LAUDERDALE, FL", "GRAND JUNCTION, CO", "WEST PALM BEACH, FL", "SIOUX CITY, IA-NE-SD", "FORT MEYERS-NAPLES, FL", "MILWAUKEE, WI", "RALEIGH-DURHAM, NC-VA", "YOUNGSTOWN, OH-PA", "GREEN BAY-APPLETON, WI", "GREENVILLE-SPARTANBURG, SC", "GREENSBORO-W.SALEM, NC", "HARRISBURG-LANCASTER, PA", "MADISON, WI", "PHILADELPHIA, PA-DE-NJ", "LACROSSE-EAU CLAIRE, WI", "GREENVILLE-NEW BERN-WASHINGTON, NC", "PITTSBURGH, PA-MD-WV", "GRAND RAPIDS-KALAMAZOO, MI", "ROCHESTER-MASON CITY, MN-IA", "BURLINGTON, VT", "WILKES BARRE-SCRANTON, PA", "ALBUQUERQUE-SANTA FE", "DETROIT, MI", "WAUSAU-RHINELANDER, WI", "CHARLOTTESVILLE, VA", "JOHNSTOWN-ALTOONA, PA", "PORTLAND-AUBURN, ME-NH-VT", "FLINT-SAGINAW, MI", "LANSING, MI")
-
-vet_img_08_top <- ch4_airings_analysis %>% filter(!Elec_Cycle %in% c(2000, 2004, 2016), media_market %in% top_mkts_by_name_08) %>% group_by(media_market) %>% summarize(prop_vet_img=mean(vet_img)) %>% arrange(prop_vet_img)
-
-# filter through these media markets and obtain the percentage of ads featuring vets in these media markets.
-
-# Now move to only 2016. 
-
-comp_mkts_16 <- ch4_airings_analysis %>% filter(Elec_Cycle %in% c(2016))%>% group_by(media_market) %>% 
-  summarize(
-  count=n()
-) %>% arrange(count)
-
-# create a character string that has the media market names of these top 50 media markets. 
-
-top_mkts_by_name_16 <- comp_mkts_16$count
-
-```
-
-### State Polarization Effort
-
-``` {r state polar}
-
-load("/Users/petererickson/Documents/Wisconsin Academics/Dissertation/dissertation/data/shor-mccarty-state-polar.rdata")
-
-summary(table)
-
-state_polar <- table %>% select(st, year, h_diffs, s_diffs) %>% filter(year %in% c("2000", "2003", "2004", "2007", "2008", "2011", "2012", "2015", "2016"))
-
-```
-
-
-``` {r county level voting data}
-
-cty_vote <- read_csv(here("data", "countypres_2000-2020.csv"))
-
-```}
-
 
 
