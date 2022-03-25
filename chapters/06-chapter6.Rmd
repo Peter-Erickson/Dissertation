@@ -83,10 +83,11 @@ Eighteen and a half years later, the United States withdrew from Afghanistan aft
 Cotton's question by itself was not necessarily inappropriate, but it is highly likely that Cotton wished that Milley either would have resigned, or that Milley would at least have signaled to the public that he considered resigning as a result of the chaotic withdrawal from Afghanistan. Such an intimation from the mouth of a sitting Chairman of the Joint Chiefs of Staff would have generated significant political points for Congressional Republicans, as well as cause a fairly significant rift in civil-military relations at an already tense moment. 
 
 This chapter identifies, compares, and contrasts the patterns of political behavior engaged in by military and civilian actors throughout the post-9/11 era. From approximately 2001 - 2021, the level of military prestige remained high and relatively constant, but the level of political polarization rose sharply. As the preceding paragraphs note, civil-military tension exists when polarization is relatively low, as was the case in 2003, and when it is much higher, as in 2021. This chapter, however, explores how the political behaviors that occur in low versus highly polarized settings, but that involve a relatively prestigious military, are nonetheless different.  
+The chapter proceeds in four parts. First, I describe the predictions concerning the patterns of political behavior as a state moves from a domestic environment marked by low polarization and high military prestige to one marked by high polarization and high military prestige. In this section, I also substantiate the claim that such a movement approximates the change in the domestic environment that occurred in the United States from 2001 - 2021. In the second part of this chapter, I describe several political behaviors associated with one significant civil-military relations episode that occurred during the first half of this nearly twenty year period. The episode that I focus on is the so-called 2006 "Revolt of the Generals," which involved several retired senior military officers publicly castigating the Secretary of Defense, Donald Rumsfeld. 
 
-The chapter proceeds in four parts. First, I describe the predictions concerning the patterns of political behavior as a state moves from a domestic environment marked by low polarization and high military prestige to one marked by high polarization and high military prestige. In this section, I also substantiate the claim that such a movement approximates the change in the domestic environment that occurred in the United States from 2001 - 2021. In the second part of this chapter, I describe several political behaviors that occurred during the first portion of this period, from approximately 2001 - 2010. The third part of the chapter explores the political behaviors that occurred during the second portion of the period, from roughly 2011 - 2021. The fourth and final part of this case study evaluates, compares, and contrasts the political behaviors that occurred involving the military in these two periods. 
+The third part of the chapter explores an episode that occurred during the second half of the period. I focus on the political behaviors involving the military undertaken in the summer of 2020 and throughout 2021, which involved periods of domestic civil unrest, a turbulent presidential election, and the US withdrawal of Afghanistan. The fourth and final part of this case study evaluates, compares, and contrasts these two episodes. 
 
-Similar to the previous chapter, this chapter cannot, and therefore does not attempt, to recount or list every political behavior involving the military that occurred during the examined period. Instead, I focus on the tenor, characteristics, and tone of some of the most glaring political behaviors that civilian and military actors undertook throughout this period involving the military. Some of the episodes that will be described here have been alluded to in the previous empirical chapters. The chief argument made in this chapter is that there is moderate evidence to support the claim, in accordance with this dissertation's theoretical predictions, that the rise in the level of political polarization occurring from 2001 - 2021 has contributed to increases in both the politicization of the military and the undertaking of more extreme forms of political behavior by military and civilian actors.
+Similar to the previous chapter, this chapter cannot, and therefore does not attempt, to recount or list every political behavior that occurred during each episode. Instead, my central focus is on the tenor, characteristics, tone, and underlying reasons for some of the most glaring or noteworthy political behaviors associated with each episode. The chief argument made in this chapter is that there is moderate evidence to support the claim, in accordance with this dissertation's theoretical predictions, that the rise in the level of political polarization occurring from 2001 - 2021 has contributed to increases in both the politicization of the military and the undertaking of more extreme forms of political behavior by military and civilian actors.
 
 # Theoretical Predictions for the Post-9/11 Era, 2001-2021
 
@@ -164,19 +165,75 @@ From a methodological standpoint, then, the analysis which follows takes the yea
 # Part 1 - The War in Iraq and The Revolt of the Generals, 2004 - 2006
 \doublespace
 
-I briefly noted the "Revolt of the Generals" in chapter 3. There, I mentioned that in 2006, several recently retired generals publicly criticized the wartime leadership of Secretary of Defense Donald Rumsfeld. In this section of the case study, I describe the "Revolt of the Generals" in greater detail, and explain the specific political behaviors engaged in by those retired officers who participated in this "revolt." I conclude this section of the case study by distilling those issues that were truly at stake in this particular flashpoint of US civil-military relations.  
+In the first section of this case study, I describe the 2006 "Revolt of the Generals." After describing the political behaviors that occurred as part of this episode, I clarify the reasons why this episode occurred in the first place, and distill the underlying issues that were ultimately at stake in this episode. While this dissertation certainly speaks to the normative implications of the "Revolt of the Generals" with respect to civil-military conduct, my primary task here is not to render a definitive evaluation of the conduct that occurred as part of this episode. Others [@cook_revolt_2008; @snider_strategic_2014] have written extensively on this. Rather, my primary task is to show how the a relatively low level of polarization and a relatively high level of military prestige enabled the "Revolt of the Generals" to occur. 
 
-## Summary
+## Background
+
+The 2006 "Revolt of the Generals" narrowly refers to the behavior of several recently retired senior military officers who, in the Spring of 2006, publicly criticized the Secretary of Defense, Donald Rumsfeld, concerning Rumsfeld's leadership of the war in Iraq. By 2006, the war in Iraq was three years old, and more importantly, it was clear that hopes for a quick and relatively easy war had been dashed. 
+
+In a broader sense, the "Revolt of the Generals" must be viewed as the military's backlash to their perception of not being heard, listened to, or valued by their civilian chain of command within the Department of Defense [@snider_strategic_2014; @binkley_revisiting_2020]. In a way, the "Revolt of the Generals" signified a reaction by several retired military officers to the way that civilians had disparaged General Shinseki prior to the war's beginning, and the way that he was treated by his civilian superiors after he candidly presented Congress with his views on force levels required to stabilize Iraq (as noted in this chapter's introduction).  
+
+As is always the case, the timing of political behaviors undertaken matters, and those associated with the "Revolt of the Generals" are no exception. Not only was the war in Iraq three years old in the Spring of 2006, but also later that year, Congressional midterm elections were held. The behavior of a small but influential number of retired senior military officers ultimately elevated the status of the war in Iraq, and would contribute to the ultimate dismissal of Rumsfeld by the President, George W. Bush.   
+
+## Political Behaviors Undertaken
+
+The immediate slate of military actors who participated in the "Revolt of the Generals" include a total of six retired military officers, including Army Major General Paul Eaton, Marine Lieutenant General Greg Newbold, Army Major General John Batiste, Marine Lieutenant General Paul Van Riper, Army Major General John Riggs, and Army Major General Charles Swannack. In the paragraphs that follow, I describe the behaviors undertaken by these six officers. 
+
+However, I then describe a number of political behaviors undertaken by other military and civilian actors in response to the behavior of these six primary military actors. By considering the behaviors undertaken both as part of the "Revolt" _and_ those undertaken directly in response to it, the reader is better positioned to understand the full impacts of the episode. 
+
+### Public Appeals
+
+The primary political behavior undertaken by military actors during the "Revolt of the Generals" was that of making public appeals. In March and April of 2006, Generals Eaton, Batiste, and Newbold penned articles that appeared in _The New York Times_, _The Washington Post_, and _Time_ magazine, respectively [@eaton_top-down_2006; @batiste_case_2006; @newbold_why_2006]. Shortly afterward, Generals Van Riper, Riggs, and Swannack gave interviews in which they "concurred with the criticisms levied by Eaton, Newbold, and Batiste" [@binkley_revisiting_2020, 23].
+
+The public appeals made by the military actors who participated in the "Revolt" charged Rumsfeld with micromanaging the war effort, failing to heed the advice of military professionals during the planning and execution of the war, and insisting on a strategic course of action bound for failure. In addition to the outspoken and highly visible nature of the public appeals made, the public appeals undertaken were unique in that they explicitly stated that in order for the US to prevail in Iraq, "Rumseld must go" [@eaton_top-down_2006]. 
+
+Somewhat unsurprisingly, some military actors then defended Rumsfeld, and while his defenders likewise did not necessarily constitute a large number of actors, they nonetheless also engaged in making public appeals. For instance, four retired generals - Vallely, McInerney, Crosby, and Moore - penned an op-ed in _The Wall Street Journal_ in April of 2006 entitled, "In Defense of Donald Rumsfeld" [@john_crosby_defense_2006].
+
+### Grandstanding
+
+A secondary type of political behavior involved in the "Revolt of the Generals" was grandstanding, which Risa Brooks has defined as the "threat or actual resignation in protest of policy" [@brooks_militaries_2009, 219]. While no officers (to my knowledge) actually resigned or threatened to resign as a result of or in conjunction with the "Revolt of the Generals," the entire episode sparked somewhat of a debate among civil-military relations scholars as well as among military officers regarding the role, if any, of the behavior of military officer resignation and the conditions under which such a behavior should be considered. 
+
+Here, I do not take up the contours of that debate. Chapter two discussed this behavior in detail, and made the point that even among scholars, there is a lack of consensus about if and when resignation should be considered a viable option by military actors.^[For example, see @dubik_principled_2014; @snider_strategic_2014; and @milburn_breaking_2010 for arguments who support the act of resigning under very strict conditions. See also, however, @m_shields_introduction_2017 and @golby_beyond_2015 for alternate views.] However, it is rather important to at least acknowledge the debate over resignation that occurred in the wake of the "Revolt of the Generals" because many felt that General Shinseki, three years prior, would have been entirely justified to have resigned in protest in 2003 rather than acquiesce begrudgingly to a war plan that he believed would result in failure.
+
+Finally, it should be said that the military actors who participated in the "Revolt of the Generals" were essentially insisting that their former civilian boss, the Secretary of Defense, resign. Though Rumsfeld did not heed such requests, this aspect marked the "Revolt" as different from previous civil-military disputes that had occurred in American history.  
+
+### Impact of Undertaken Behaviors
+
+The entire "Revolt of the Generals" episode, and the political behaviors undertaken by the military actors involved in it, were rather visible to the American public. Especially in a midterm election year, these behaviors likely contributed to shaping the views of Americans on the war in Iraq. 
+
+Donald Rumsfeld, the Secretary of Defense, remained at his post until one week after the mid-term elections in which the Republicans incurred heavy losses. In all, Republicans lost more than twenty seats in the House, and more than five seats in the Senate, resulting in the Democratic Party gaining control of the House of Representatives for the first time since 1994 [@hulse_wave_2006].
+
+In his memoirs, President George W. Bush briefly commented on the "Revolt of the Generals." Bush wrote, "there was no way I was going to let a group of retired officers bully me into pushing out the Secretary of Defense. It would have looked like a military coup and would have set a disastrous precedent" [@bush_decision_2010, 93]. 
+
+## How Levels of Polarization and Prestige Shaped the Revolt of the Generals
+
+At its core, the entire "Revolt of the Generals" episode deals with the question of how military officers should dissent with their civilian leaders, the circumstances under which dissent is appropriate, and what forms military officer dissent should (and conversely, should not) take. Those who participated in the "Revolt of the Generals," and those who applauded the generals involved in it, argue that the behavior of the revolting generals was a great public service in that it ensured "that the people of a democracy [were] sufficiently well informed to make sound decisions about their leaders in a time of war" [@kagan_let_2006, 15]. Critics of the outspoken generals, on the other hand, raised a number of concerns, ranging from criticizing civilian leadership altogether, to leveling public and visible criticism during a time of war, when US forces were engaged in hostile action [@snider_strategic_2014].
+
+But something that previous analyses of the "Revolt" have not fully explored is the role of polarization and military prestige in enabling the "Revolt" to occur in the first place, and the manner in which it unfolded. As I have already noted, the level of polarization in 2006 was not low in absolute terms, but it was relatively low compared to the levels that would emerge in the years which followed, and relatively higher than the level of polarization that had existed, for example, a decade earlier. 
+
+Yet the main substance of the "Revolt of the Generals" centered on topics that, although they certainly included some partisan aspects, were largely bipartisan in nature. These topics included the planning and execution of a war that had been initiated with a high degree of bipartisan support. Regardless of what one thinks about the normative appropriateness of the "Revolt of the Generals," it is vital to consider, at least for the purposes of this dissertation, that the substance of the "revolt" was the perceived inadequacy of wartime leadership of the civilian chain of command, namely, Donald Rumsfeld. Critics may, rightly in my view, argue that in expressing dissent, the revolting generals violated the principle of civilian control, but in my view, they did not violate either the principle of non-partisanship nor the principle of non-interference. 
+
+Say some more about that here. And then cite Jon Pevehouse. 
+
+### Summary
 
 \singlespace
 # Part 2 - Domestic Unrest, Presidential Transition, and the Withdrawal from Afghanistan, 2020-2021
 \doublespace
 
-## Summary
+## Background
+
+## Political Behaviors Undertaken
+
+### Impact of Undertaken Behaviors
+
+## UnderlyingIssues at Stake
+
+### Summary
 
 # Evaluation, Comparison and Contrast of Behaviors
 
-## The Role of Polarization
+## The Role of Polarization - Does Your Theory Fit? Why?
 
 ## Alternate Explanations
 
