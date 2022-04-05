@@ -108,13 +108,13 @@ ols2_attack <- lm(mean_attack ~ percent_vet + sen_polar + HostCasRateLagged, dat
 ols2_nonint <- lm(mean_out_issues ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
 ```
 \singlespace
-```{r ch4appx-logit-reg-results-2, include=T, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
-stargazer(ols2_mil_img, ols2_actdty_img, ols2_vet_img, ols2_cmbt_img, ols2_hard_img, ols2_appear, ols2_part_act, ols2_endorse, ols2_attack, ols2_nonint,
+```{r ch4appx-ols-reg-results-2, include=T, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+stargazer(ols2_mil_img, ols2_actdty_img, ols2_vet_img, ols2_cmbt_img, ols2_appear, ols2_part_act, ols2_endorse, ols2_attack, ols2_nonint,
           type="latex",
           label="tab:ch4regressionappx2",
           title="OLS Regression Results, Chapter 4 Appendix, Without Election Cycle - Campaign Season Fixed Effects",
           covariate.labels = c('Per. Vet. Pop.', 'Sen Polar.', 'Cas. Rate (lagged)'),
-          dep.var.labels = c('Mil. Img', 'Act. Dty. Img', 'Vet Img.', 'Combat Img.', 'Hardware Img.', 'Prom. Appearance', 'Any Viol.', 'Endorse', 'Attack', 'Outside Issues'),
+          dep.var.labels = c('Mil. Img', 'Act. Dty. Img', 'Vet Img.', 'Combat Img.', 'Prom. Appearance', 'Any Viol.', 'Endorse', 'Attack', 'Outside Issues'),
           model.names=F,
           header=FALSE,
           column.sep.width = "-15pt",
