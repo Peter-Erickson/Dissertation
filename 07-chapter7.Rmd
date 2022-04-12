@@ -1,0 +1,149 @@
+# Chapter 7
+
+This concluding chapter seeks to bring the preceding six chapters of this dissertation together. The goals of this chapter are four-fold: first, to state what this dissertation has shown; second, to identify what this dissertation has not yet shown; third, to help the reader understand what this study means and why it matters, especially with respect to contemporary civil-military relationships in the United States; and fourth, to recommend avenues of future research.
+
+This chapter proceeds in four main parts. The first part of the chapter briefly integrates the overall argument and the findings presented over the previous six chapters. This part of the chapter is intended to succinctly capture what this dissertation has shown. The second part of this chapter identifies important limitations of this study, and discusses important aspects of the argument that are not yet known. The third portion of this chapter presents the implications of this dissertation. Emphasis is placed on why scholars, military officers, and the American public should care about what has been presented in this dissertation. The final part of the chapter recommends several strands of future research related to this dissertation.   
+
+# Integrating the Argument
+
+At its core, this dissertation ultimately sought to explain why political behaviors involving the military occur in mature democracies such as the United States. In so doing, this dissertation first provided a framework by which to assess and measure political behaviors involving the military. The framework presented here centered on the adherence by civilian and military actors to three central principles of civil-military relations of civilian control, non-partisanship, and non-interference into certain realms of the state. These principles, which were explained in chapter one, have their roots in scholars such as Samuel Huntington, his critics, and military normative practices that have been fostered since at least the end of World War Two. 
+
+Chapter two then presented a theory that argued that two primarily domestic variables, the levels of military prestige and political polarization, shape the degree to which civilian and military actors adhere to these principles. The theory argued that military actors increasingly violate the central principles of civil-military relations as the levels of both political polarization and military prestige rise. Civilian actors, the theory argued, increasingly violate the principles of civil-military relations as the level of military prestige rises. The theory also argued that because these domestic variables always exist at some level, the two variables combine such that four distinct domestic structures are ultimately plausible, each of which denotes paired relative (high or low) values of the level of political polarization and military prestige. These domestic structures can be seen in Table \@ref(tab:poss-environment3).
+
+Chapters three through six tested this theory. Chapters three and four performed rigorous quantitative analysis of original observational data of one political behavior undertaken by each separate type of actor. Chapter three explored public appeals written by retired military officers (a military actor) from 1979-2020, and chapter four explored the use of military imagery and military actors in presidential campaign advertisements from 2000 - 2016, a behavior undertaken by predominantly civilian actors. 
+
+The methodological approach employed in both of these chapters was similar. I first operationalized how each behavior could theoretically violate each central principle of civil-military relations. I then identified these violations across the data, controlled for other variables that could also be responsible for spurring these violations, and analyzed the data over time, and in chapter four, also across space (geographic media markets in the United States).    
+
+Chapters five and six, on the other hand, investigated parts of the theory through qualitative analysis. These chapters, too, employed a similar methodological approach. Each chapter examined a different historical era in which one of the two independent variables (military prestige and polarization) changed, while the other variable remained relatively constant. Chapter five went back to the 19th Century, and examined the roughly 15 year period from the end of the US Civil War in 1865 until 1880. During this period, the level of polarization remained high, but the level of military prestige declined. Chapter six examined the contemporary post-9/11 era. During the twenty years from 2001 - 2021, the level of military prestige remained relatively high and constant, but the level of polarization rose significantly.
+
+The methodological approach employed in both chapters five and six was different than that undertaken in chapters three and four. Each chapter examined smaller periods or episodes that occurred within the range of years examined in each of chapter. Furthermore, instead of examining one political behavior undertaken by one type of actor, chapters five and six sought to examine multiple political behaviors undertaken by both types of actors, and to characterize the tone, tenor, and broader characteristics of the political activity involving the military in each era. Thus, chapter five compared and contrasted political behavior involving the military undertaken in 1865-1868 with that undertaken in 1877-1880. Chapter six, on the other hand, compared and contrasted the "Revolt of the Generals," which was undertaken in 2006, with political activity involving the military undertaken amid unfolding domestic unrest in 2020 and immediately after the US withdrawal from Afghanistan in 2021. 
+
+## Findings and Results
+
+### The Role of Polarization
+
+This dissertation clearly found that rising levels of polarization impact the degree to which military actors adhere to the three central principles of civil-military relations. Chapter three found moderate statistical evidence for this assertion (see in particular Tables \@ref(tab:ch3reg1) and \@ref(tab:ch3reg2) ). The first period examined in chapter five  (1865-1868) as well as the second portion of chapter six (2020-2021) also found qualitative evidence highly consistent with this claim. 
+
+As the level of polarization rises, the results suggest that, consistent with the expectations laid out in the theory of this dissertation, military actors are increasingly willing to violate the principles of civil-military relations. Chapters five and six especially found evidence consistent with the underlying reason suggested by the theory for this relationship between rising polarization and a weakening adherence to the central principles of civil-military relations by military actors. 
+
+Indeed, the theory argued that high polarization levels indicate significant divergence, and potentially fundamental opposition, in the political community concerning the underlying moral values and worldviews that should hold sway in the state. During the post-US Civil War period, the fundamental opposition in moral values and worldviews centered on the issues comprising American Reconstruction policy. Among these issues, chapter five noted, were the immense questions related to the rights and political freedoms of former slaves, what actions the federal government should take to secure these freedoms, and what punitive measures, if any, should be levied against the former Confederate states and those who had taken up arms against the Union. In chapter six, this divergence in moral values and worldviews that underlies high polarization levels stemmed from multiple policies of the former President, Donald Trump. 
+
+### The Role of Military Prestige
+
+The evidence for the role of the level of military prestige in shaping the political behavior of military and civilian actors is not quite as strong as the evidence for the role of polarization. Chapter four found evidence that civilian actors are in fact sensitive to the level of military prestige in employing or harnessing military figures to appear and to behave in certain ways that violate the central principles of civil-military relations during presidential campaign television advertisements. However, chapter four employed a proxy measurement for the level of military prestige (the percentage of the overall population that is a veteran in each media market). 
+
+By itself, the use of a proxy measurement in chapter four is not necessarily problematic. However, and as chapter four noted, there are other possible variables that might also be correlated with the percentage of the veteran population in a particular locale, such as partisanship or military culture, that prevent firmly concluding that military prestige (as measured by the proxy of the percentage of veterans in the population) is in fact driving the civilian actors to employ military figures in campaign ads in ways that violate the central principles of civil-military relations. Furthermore, chapter five was the only case study that included an era in which the level of military prestige was relatively low (beginning in the late 1870s). 
+
+However, the evidence for the role of military prestige in shaping civilian and military actor adherence to the central principles of civil-military relations was more than merely anecdotal. The case study undertaken in chapter five particularly suggested that even when high polarization levels abound - as they did throughout the bulk of the late 19th Century in the US - a relatively less prestigious military does not hold as much potential to influence public opinion, and that as a result, military and civilian actors are less likely to behave in ways that violate the principles of civil-military relations when the level of military prestige is relatively low compared to when it is high.  
+
+### Unique Domestic Environments
+
+Holistically, there is thus mild evidence to support the notion that there are, in fact, somewhat distinct domestic environments that exist and which depend on the relative levels of political polarization and military prestige. At a minimum, this stands out as a contribution that will help future scholars and practitioners of civil-military relations in terms of appreciating and articulating the similarities and differences of the conduct of civil-military relations over time. Of the four theoretical domestic environments that are shown in Table \@ref(tab:poss-environment3), however, the one that was not explored in this dissertation is that which is possible when both polarization and military prestige operate at relatively low levels. 
+
+This dissertation, however, explored the presence of these environments in strictly relative terms, which allowed for clearer theoretical distinctions to be made between environments. It made sense to classify what quadrant of Table \@ref(tab:poss-environment3) a particular period of time belongs, but only in relation to a different period of time. For now, this is the best way to think about and employ this framework, rather than to insist that a certain era falls into a distinct quadrant in absolute terms.   
+
+# Limitations of this Study
+
+While I have attempted to undertake a systematic and careful investigation of the role of polarization and military prestige in shaping the political activity of civilian and military actors involving the military, there are nonetheless several shortcomings that deserve highlighting. Here, I focus on three. 
+
+The first relates to the methodological approach employed in this dissertation, particularly with respect to the use of observational data. The second involves theoretical limitations. The third involves the generalizability of the results obtained, and more broadly speaking, the application of the theory advanced in this dissertation to settings beyond the United States.
+
+## Methodological Approach
+
+One of the main limitations of this study involves the methodological approach undertaken, particularly in chapters three and four, the main quantitative empirical chapters. This main limitation centers on the fact that I focused on one and only one type of political behavior in each of these respective chapters utilizing observational data.
+
+Because there are multiple types of political behaviors that civilian and military actors have at their disposal (see Tables \@ref(tab:pol-behav) and \@ref(tab:pol-behav-civ)), one criticism might be that the results uncovered here thus apply only to these particular behaviors. My response to this particular thread of criticism is one of agreement: indeed, we cannot state that the levels of polarization and military prestige will, for sure, be associated with increasing violations of the principles of civil-military relations through every and all other types of political behaviors undertaken by military and civilian actors, respectively. Nonetheless, this research project has undertaken the first rigorous and original analysis of these two specific behaviors that future scholarship can and should build on. 
+
+Another criticism of the methodological approach employed involves the broader concern of omitted variable bias, which is always an important consideration when relying on observational data. Indeed, this is an important and valid concern. In each of the empirical chapters in particular, the respective regression analyses included controls for variables that theoretically could also have driven variation in the dependent variables examined. But, especially as the preceding discussion of the proxy measurement of military prestige in chapter four made clear, omitted variable bias always presents some level of concern. 
+
+The case studies conducted in chapters five and six also helped to mitigate against the concerns of omitted variable bias and the limited scope of focusing on one type of political behavior, however. Each of the case studies thus examined the wider field of political activity undertaken in a particular era. Even so, these concerns remain valid and deserve to be acknowledged.
+
+## Theoretical Approach
+
+Another limitation of this study involves the theory advanced in this dissertation. The theory advanced in this dissertation deliberately incorporated _both_ military and civilian actors. Doing so, chapters one and two argued, is both a better reflection of the two-sided nature of civil-military relations and the reality that both types of actors play significant roles in sustaining a state's overall civil-military relationship.
+
+While this is an overall positive theoretical undertaking, the one actor that did not receive more articulation in the theory is the public itself. The role of the public in the theory advanced here was implicit; that is, this theory noted how the variables of polarization and military prestige impact various aspects of the public. For example, this dissertation noted that rising polarization is associated with the public being more divided over issues of the day, and that the level of military prestige impacts public opinion regarding the military in certain ways. 
+
+Future theoretical refinements to the theory advanced in this dissertation might more explicitly separate the public as an altogether separate actor, however, from the civilian and military elites who regularly engage in the conduct of civil-military relations. Doing so may enable even more finely grained examinations of the variables of polarization and military prestige, and in particular, _how_ these variables impact the public, and in what ways. 
+
+## Utility to Other Democracies?
+
+Another significant limitation of this study is its export to settings beyond the United States. This dissertation clearly centered on the United States, and yet, all of the variables included in the theory  - political behaviors that violate normative principles, polarization, and military prestige - certainly operate in settings beyond the United States. Thus, an important question is whether the findings uncovered in this dissertation might also apply, and to what degree, in other mature democracies, such as in Canada, Western Europe, and Israel?
+
+The short answer is that we cannot be entirely sure. Future research can and should incorporate cross-national investigations of elements of the theory presented in this dissertation. Nonetheless, a couple of considerations are important. 
+
+In my view, the most important consideration related to the generalizability of the theory advanced here to other mature democracies involves the definition, and in particular, the underpinnings, that are associated with the independent variables. In particular, the variable of polarization may contain several US-specific considerations.
+
+For example, this dissertation conceptualized polarization to indicate divergence in the moral values that hold sway in society, and military prestige to indicate the degree to which the military is considered as filling a central role and/or skilled at what it does. And while the definition of polarization may be the same in other contexts beyond the US, it is not clear, at least to me, that polarization necessarily reflects the same dynamic of divergence in moral values and/or worldviews that are competing for primacy in the public square in other countries. 
+
+This matters because using US-specific measures of polarization, such as DW-NOMINATE scores used in chapter three and shown in multiple places throughout this dissertation, the United States has only had extreme levels of polarization twice in its history. Scholars of comparative politics and country-specific experts will perhaps be in a better position to determine if polarization is a relatively unique (or not) phenomenon in a particular country or region of interest. Intuitively, my initial guess is that in countries where polarization is or has been far more common than in the United States, changes in the level of polarization would result in far less significant change in the dependent variable than have been uncovered here. But again, this is only a conjecture that future research would have to tackle conclusively. 
+
+Another important consideration involves the dependent variable of political activity involving the military, and how the dependent variable was measured in this dissertation, which involved violations to the three central principles of civil-military relations. This framework for identifying and measuring the dependent variable is undoubtedly a US-centric framework. Yet that may not mean it is only a framework that can be applied in the United States. 
+
+The difficulty comes, in my view, when we try to define the scope and boundaries of the three central principles of civil-military relations in practice to settings beyond the US. For example, I noted in chapters two, three, and six that in the United States, the line that separates active from retired military officers and the conduct that each group undertakes exists, but has historically not been drawn in drastically different places (although this dissertation argued that this line is being increasingly drawn in different places as a result of increasing polarization!). It is not clear to me that such a line either exists, nor that it must necessarily exist, in other countries, including in mature democracies. 
+
+It is therefore important to at least allow room for the possibility that while all mature democracies broadly share the three central principles of civil-military relations, how these principles have historically regulated specific instances of political behavior may require country-specific application and interpretation. For example, violation of the principle of non-partisanship in the two party system of the United States is a somewhat clear violation to identify, in my view. I am not as certain about how the principle of non-partisanship should look in practice in parliamentary systems of government, where multiple parties exist.
+
+# Implications of this Study
+
+This section of the chapter presents the main implications of this dissertation. Here, I have in mind what I think are the most important takeaways for policymakers, especially civilian and military elites, with respect to the conduct of civil-military relations in the contemporary United States.
+
+There are three main implications that stem from this dissertation, which I address in the paragraphs below, beginning with the broadest implication and moving towards the most narrow. 
+
+## The Domestic Environment Matters 
+
+The first implication stemming from this dissertation is that the state's domestic environment profoundly shapes civil-military conduct. This dissertation has specifically shown that the variables of polarization and military prestige shape the behavior of civilian and military actors and in unique ways.
+
+At a minimum, civilian and military actors can and should recognize how each type of actor responds to changes in the levels of military prestige and polarization, and how these changes have unfolded in different era in US history. Such recognition may not and likely will not make the conduct of civil-military relations for either type of actor necessarily easier, but it will enable each type of actor to better understand the inherent pull that each actor type is subject to in the political arena. 
+
+This dissertation suggests that civilian actors will inherently be pulled by the desire to win and remain in political office, a finding that is consistent with the most basic of political instincts. A highly prestigious military (or highly prestigious military figures) that has the potential to influence and shape public opinion is thus a ripe target for civilian actor attempts to harness the military for their own behavior.
+
+This dissertation did not empirically test whether military actors are sensitive to changes in the level of military prestige, but the theory presented here suggested that they are. Furthermore, some of the qualitative evidence presented here did find evidence consistent with the notion that military actors, too, are sensitive to changes in the level of military prestige. 
+
+In short, both civilian and military actors are increasingly likely to use the military - when it is relatively popular - in ways that challenge and in some cases, violate, the principles of civil-military relations. Military and civilian actors may not be particularly surprised by this implication, but both actors types, at a minimum, can and should acknowledge that a temptation exists to use the military, when it is prestigious, in ways that violate normative principles. 
+
+This dissertation also found that military actors are particularly sensitive to changes in the level of political polarization in the state. In particular, rising levels of polarization indicate that military actors will increasingly behave in ways that violate the central principles of civil-military relations. 
+
+The major takeaway from this finding, in my view, differs for civilian and military leaders, respectively. Civilian leaders who govern during times of high polarization should recognize that the military, and those who serve in it, are likely as polarized as the very country they govern in polarizing times. As the issues that comprise a state's polarized political landscape take on matters that involve issues of ideology, morality, and worldview, the military and its members are thus increasingly likely to be divided over these very issues. While I do not think that civilian leaders should necessarily lower their expectations in polarizing times in terms of expecting professional conduct from the military, I do think civilian leaders should recognize the forces of polarization as significant.
+
+Military leaders similarly should understand that they face unique challenges in polarizing times, much in the way that Generals Grant (in chapter five) and Milley (in chapter six) seem to have understood in terms that were up close and personal. These challenges were especially pronounced when both polarization and military prestige operated high levels. 
+
+In fact, the challenge military leaders face in eras of high polarization and relatively high military prestige seems to be a two fold challenge. The first involves the challenge that military leaders face in dealing with their civilian actor counterparts and superiors. Highly polarizing times seem to be associated with controversial policies that are, by definition, hated by some and beloved by others. This naturally puts that military and military leaders, especially those who operate at the highest levels, in a tough place with little room to wiggle, politically speaking. Even military leaders who initially eschew partisan identification at all costs, it seems, eventually encounter a situation in which they either reluctantly ally with a partisan group or are labeled an ally of a partisan group. In chapter five, this occurred when General Grant eventually allied with Republicans in Congress as a means of preventing President Johnson from doing what Grant and the Republicans thought would be irreparable damage to the Republic as Reconstruction proceeded, and in chapter six, when several Republicans accused Milley of being a traitor for engaging in phone calls with a Chinese General in the wake of the 2020 Presidential Election and its aftermath. 
+
+The second side of the same challenge that military leaders face in highly polarizing environments involves their ability to lead, manage, and harness their own internal military organizations and members. This challenge describes the fact that the members of the military are polarized when the nation is polarized. Military leaders cannot be blind or deaf to this reality, and at the same time, senior military leaders want their organizations and members to act professionally, and to adhere to the central principles of civil-military relations.
+
+Thus, this challenge of polarization presents somewhat of a fine tightrope for military leaders to have to walk in practice. If military leaders ignore the reality and the strength of polarization, their lack of action might be interpreted by their own populations as favoring one side or the other over any number of issues or events related to any number of polarizing disputes. On the other hand, if military leaders do not insist on professional conduct - even in the midst of ongoing tensions that reflect polarization - they risk the military or its members also being seen as favoring or allying with one side over the other. 
+
+\singlespace
+## The Principles of Civil-Military Relations Need a Healthy Environment to Flourish
+\doublespace
+
+A second implication that flows from this dissertation involves the conditions that have led and that lead to the nurturing of the central principles of civil-military relations in the United States. On this point, this dissertation's findings seem to suggest that the central principles of civil-military relations can better flourish under some domestic conditions rather than others. 
+
+A starker way of restating the above is that the United States seems to have developed the central principles of civil-military relations in the first place because certain domestic conditions enabled the formulation and adoption of these principles. Through the lens of this dissertation's findings, then, the central principles of civilian control of the military, non-partisanship of the military institution, and non-interference of the military into certain realms of the state were inculcated because the domestic environment facilitated their inculcation. 
+
+Indeed, this seems to fit with the fact that Samuel Huntington wrote _The Soldier and the State_ in 1957. At that time, and as Chapter One explained, the United States was engaged in a Cold War with the Soviet Union. But as shown in Figure \@ref(fig:polar-chamber), polarization was also incredibly low (and had been since the late 1930s, and would remain so until the mid-1970s). Here's the point: Huntington did not seem too very concerned with levels of polarization impacting civil-military relations. The context in which he lived was very different from that which prevails in 2022. 
+
+We live in different times, however.  Something about wars and prestige changing quickly, but moral values taking a long time and polarization lasting a long time. 
+
+
+## Recognizing Inescapable Impacts
+
+
+
+# Avenues of Future Research
+
+# Conclusion
+
+
+\pagebreak
+
+
+
+
+
+
+
+
+
+

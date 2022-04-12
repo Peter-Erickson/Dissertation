@@ -2,7 +2,9 @@
 
 This chapter Appendix roughly aligns with the chronological order of the chapter. 
 
+\singlespace
 ## Note on the Campaign Media Analysis Group and its Role in the Data
+\doublespace
 
 WiscAD and WMP gather the television advertisements with the assistance of a commercial company, the Campaign Media Analysis Group (CMAG). CMAG provides several pieces of information when releasing the data, such as the media market in which a particular advertisement aired, the estimated cost of running a particular advertisement, the time of day the advertisement was run, and other variables. A group of scholars and graduate students affiliated with WiscAD and WMP then conduct additional coding on the advertisements. This coding varies to some extent by election cycle, but otherwise remains markedly similar. The additional variables that are coded for in each election cycle include items such as the specific issues that an advertisement mentions or addresses during the advertisement, whether a candidate is featured during the advertisement, and whether a given advertisement takes on a negative tone, and more. 
 
@@ -48,7 +50,9 @@ I include a control for the level of congressional polarization in the US House 
 
 I also include a measure of military casualties, and I lag the measure by one year. I include a measure of casualties because it as plausible to think that the level of casualties sustained by US military forces shapes how civilian actors use military figures during campaign ads. I lag the level of casualties by one year because a previous year's casualty levels may be partly responsible for spurring the decision made by civilian candidates to design advertisements that feature military actors behaving in a particular manner.^[This variable is constructed from a number of sources, and consists of the number of hostile US casualties sustained in a given calendar year per 100,000 Active Duty military forces. I include in this measurement those casualties that are the result of what the Department of Defense classifies as either "hostile action" or a "terrorist attack." Annual data is provided from the Department of Defense from 1980-2010. I then used data from the Department of Defense regarding the wars in Iraq and Afghanistan to construct a measurement for years outside of this time range. See @department_of_defense_dcas_2011; @department_of_defense_dcas_2021; @department_of_defense_dcas_2021-1; @department_of_defense_dcas_2021-2; @department_of_defense_dcas_2021-3; @department_of_defense_dcas_2021-4; @department_of_defense_dcas_2021-5; @department_of_defense_dmdc_2021 for more details.] 
 
+\singlespace
 ### Logistic Regression, without Election Cycle - Campaign Season Fixed Effects
+\doublespace
 
 Additional logistic regression results for chapter 4 are displayed in Table \@ref(tab:ch4regressionappx1). 
 ```{r ch4-appx-rds read, include=F, echo=F, warning=F, error=F, message=F}

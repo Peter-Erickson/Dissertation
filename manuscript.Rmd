@@ -110,17 +110,16 @@ UNIVERSITY OF WISCONSIN-MADISON \\
 \vspace{1cm}
 \end{centering}
 
-Date of final oral examination: XX/YY/ZZZZ
+Date of final oral examination: 05/09/2022
 
 \vspace{1.5 cm}
 
 The dissertation is approved by the following members of the Final Oral Committee: 
 \singlespace
 \vspace{1 cm}
-
-  Risa Brooks, Associate Professor, Political Science, Marquette University \newline
+  Jon Pevehouse, Professor, Political Science and Public Affairs, University of Wisconsin-Madison (Chair) \newline
+  Risa Brooks, Associate Professor, Political Science, Marquette University \newline 
   Andrew Kydd, Professor, Political Science, University of Wisconsin-Madison \newline
-  Jon Pevehouse, Professor, Political Science, University of Wisconsin-Madison \newline 
   Nadav Shelef, Professor, Political Science, University of Wisconsin-Madison \newline 
   Jessica Weeks, Professor, Political Science, University of Wisconsin-Madison  
 
