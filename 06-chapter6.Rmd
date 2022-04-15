@@ -1,5 +1,4 @@
-
-# Chapter Six {-}
+# Chapter Six - The Military After 9/11
 
 On September 11, 2001, terrorists hijacked several commercial airplanes and crashed them into several sites, including the twin towers of the World Trade Center in New York City, the Pentagon in Washington D.C., and a field in Western Pennsylvania.^[Heroic Americans prevented this plane from reaching its intended target, the US Capitol or the White House, in Washington D.C. See @kean_911_2004, 14 for more details.] That same evening, members of Congress gathered on the steps of the US capitol to collectively express solidarity and resolve. After a moment of silence and short remarks by then speaker of the House Dennis Hastert, those who were gathered sang the song, "God Bless America" [@us_congress_members_2001].
 
@@ -15,17 +14,17 @@ This chapter identifies, compares, and contrasts the patterns of political behav
 
 The chapter proceeds in five parts. First, this chapter describes the predictions concerning the patterns of political behavior as a democracy moves from a domestic environment marked by low polarization and high military prestige to one marked by high polarization and high military prestige. In this section, I substantiate the claim that such a movement approximates the change in the domestic environment that occurred in the United States from 2001 - 2021. Second, this chapter describes one major episode that occurred during the first half of this twenty year period. This first episode focused on in this chapter is the 2006 so-called "Revolt of the Generals," which involved several retired senior military officers publicly castigating the Secretary of Defense, Donald Rumsfeld. 
 
-The third part of the chapter explores an episode that occurred during the second half of the period. In particular, I focus on political behaviors undertaken by military actors coinciding with a period of domestic civil unrest in June 2020 and political behaviors undertaken by military and civilian actors in the wake of the US withdrawal from Afghanistan in 2021. The fourth part of this chapter evaluates, compares, and contrasts the political behaviors involving the military undertaken in these two episodes (2006 compared to 2020 - 2021). The fifth and final part of this chapter briefly compares and contrasts portions of this case study to the previous case study.
+The third part of the chapter explores an episode that occurred during the second half of the period. In particular, I focus on political behaviors undertaken by military actors coinciding with a period of domestic civil unrest in June 2020 and political behaviors undertaken by military and civilian actors in the wake of the US withdrawal from Afghanistan in 2021. The fourth part of this chapter evaluates, compares, and contrasts the political behaviors involving the military undertaken in these two episodes (2006 compared to 2020 - 2021). The fifth and final part of this chapter briefly compares and contrasts portions of this case study to portions of the case study undertaken in the previous chapter.
 
 Similar to the previous chapter, the central focus in this case study is on the tenor, characteristics, and underlying reasons for the occurrence of political behaviors involving the military that occur during the periods examined. The chief argument made in this chapter is that, in accordance with this dissertation's theoretical predictions, the rise in the level of political polarization from 2001 - 2021 contributed to several discernible changes in _how_ civilian and military actors politicized the military.
 
 \singlespace
-# Theoretical Predictions for the Post-9/11 Era, 2001-2021
+## Theoretical Predictions for the Post-9/11 Era, 2001-2021
 \doublespace
 
 This section describes how political behaviors involving the military are predicted to change as a state's domestic environment shifts from one marked by relatively low polarization and high prestige to one characterized by high polarization and high military prestige. 
 
-## Low Polarization and High Military Prestige
+###  Low Polarization and High Military Prestige
 
 The theory presented in chapter two argued that a state's domestic environment strongly shapes the patterns of political behavior that occur involving the military. When the level of military prestige is high, both civilian and military actors are more likely to believe that the military can influence public opinion relative to when the level of military prestige is low. When this is the case, the theory argued that both types of actors, military and civilian, will behave in ways that seek to harness or leverage the prestige of the military, even if doing so violates one or more of the principles of civil-military relations. 
 
@@ -54,7 +53,7 @@ text_env_revised2 <- tribble(~"Environment", ~"Low Polarization", ~"High Polariz
 
 Historically, there have been several significant civil-military relations disputes that have occurred under the domestic conditions of low polarization and high military prestige in the United States. For example, disputes between General Douglas MacArthur and President Harry Truman over Korea, General Matthew Ridgeway and President Dwight Eisenhower over Ike's New Deal policies in the early 1950s, and Colin Powell and President Bill Clinton over several developing post-Cold War crises in the early 1990s, all occurred in domestic environments marked by relatively low polarization and high military prestige. We should not conclude that a state's civil-military relations will be free from conflict when polarization is low and when military prestige is high. On the contrary, an environment marked by high military prestige and low polarization can produce significant civil-military tension. 
 
-## High Polarization and High Military Prestige
+### High Polarization and High Military Prestige
 
 The theory does predict, however, that as polarization rises, the potential for civil-military conflict rises even further. This prediction stems from the expectation that rising political polarization is associated with increasing ideological divisions that occur, particularly within and among military actors who, like the rest of society, become more polarized as the level of polarization grows. Therefore, holding all else equal, as the level of polarization rises, military actors are more likely to engage in political behaviors for ideological purposes that violate the principles of civil-military relations. 
 
@@ -68,7 +67,7 @@ We can further think through the dilemma in this way. An officer in the United S
 
 As Table \@ref(tab:poss-environment3) notes, simultaneously high levels of polarization and military prestige lead to a domestic environment in which there is comprehensive politicization, extreme levels of political activity involving the military, and significant potential for civil-military conflict. While it is difficult to determine exactly what form these characteristics might take in practice, or how they might manifest themselves into distinct political behaviors, these characteristics suggest that the overall political activity undertaken when polarization and military prestige are high is more severe than when military prestige is high but polarization is low.  
 
-## Substantiation of Environmental Characteristics, 2001 - 2021
+### Substantiation of Environmental Characteristics, 2001 - 2021
 
 To substantiate the claim that the level of polarization increased and the level of military prestige generally remained constant (but relatively high) over the period of 2001 - 2021, I rely on measurable quantitative data. This is different from the previous chapter, which relied on mainly qualitative data to substantiate levels of polarization _and_ military prestige after the US Civil War. Figure \@ref(fig:case2-polar) plots the level of polarization in both the US House and the US Senate, as well as the level of trust and confidence in the US military, from 2001 - 2021. Data for polarization uses roll-call voting data on members of Congress over time [@jeffrey_b_lewis_voteview_2020], and data for trust in the military comes from Gallup public opinion data over time regarding the level of public trust and confidence in the military [@noauthor_confidence_2020].  
 
@@ -92,7 +91,6 @@ df_trust_polar_cs2 %>% ggplot(aes(x=Year, y=Score, color=value)) + geom_line() +
 Figure \@ref(fig:case2-polar) shows that polarization and military prestige have changed differently over the period from 2001-2021. With the exception of a select few years, polarization levels in both the US House and Senate have consistently increased over time. In other words, polarization did not substantially drop from 2001 - 2021 during any point in time. When polarization has dropped (2007, 2009, and 2019 in the House; 2003 in the Senate), these drops have been substantively small, and more importantly, outpaced by the numerous increases that have occurred over the same period. 
 
 The level of public trust in the military, on the other hand, has exhibited greater variation between years. For example, a relative spike in public trust in the military occurred in 2003, perhaps reflecting a boost in patriotic fervor as the war in Iraq began the same year. Similarly, noticeable declines in public trust in the military occurred in 2007, perhaps reflecting impatience over mounting US casualties in Iraq, and again in 2021, perhaps reflecting public frustration over the US withdrawal from Afghanistan. 
-
 Yet even in the presence of this variability, the level of military prestige that has endured for the past twenty years is relatively high, and certainly higher than the level that existed in the late 1970s and early 1980s after the Vietnam War. Since data has been kept, for example, the lowest recorded level of trust in the military occurred in 1981, when only 50% of surveyed Americans said they trusted the military a "great deal or quite a lot" [@noauthor_confidence_2020]. In short, the period 2001 - 2021 broadly reflects a domestic environment in which the level of military prestige remained relatively constant (and high in historical terms), but in which the level of polarization increased. 
 
 Further note that Figure \@ref(fig:case2-polar) does not, and indeed cannot, definitively conclude when the shift from a relatively moderate to relatively high level of polarization occurred. However, the figure does show a fairly obvious spike in the level of polarization in the US House (red line) beginning in 2011, a spike accompanied by a smaller yet still detectable spike in polarization in the US Senate (blue line) in the same year. 
@@ -100,7 +98,7 @@ Further note that Figure \@ref(fig:case2-polar) does not, and indeed cannot, def
 From a methodological standpoint, then, the analysis which follows takes the year 2011 as a sort of natural breaking point separating relatively lower and higher levels of polarization. Therefore, this chapter will describe two episodes that each occurs well before and after the year 2011. I first describe and analyze the 2006 "Revolt of the Generals" through the lens of the three central principles of civil-military relations. I then do the same with respect to a number of political behaviors undertaken by military and civilian actors involving the military in 2020 and 2021. 
 
 \singlespace
-# Part 1 - The War in Iraq and The Revolt of the Generals, 2004 - 2006
+## Part 1 - The War in Iraq and The Revolt of the Generals, 2004 - 2006
 \doublespace
 
 The 2006 "Revolt of the Generals" narrowly refers to the behavior of several recently retired senior military officers who, in the Spring of 2006, publicly criticized the Secretary of Defense, Donald Rumsfeld, and specifically, the way in which Rumsfeld had managed the war in Iraq up until that point. By 2006, the war in Iraq was three years old, and it had become abundantly clear by then that America was no longer in for a quick or easy war. 
@@ -111,7 +109,7 @@ In another sense, the "Revolt of the Generals" signified the means by which seve
 
 The timing of the "Revolt of the Generals" also matters a great deal. Not only was the war in Iraq three years old in the Spring of 2006, but also that same year, Congressional midterm elections were held. The behaviors conducted as part of the "Revolt of the Generals" ultimately elevated the status of the war in Iraq, and in all likelihood, partially contributed to the eventual dismissal of Secretary Rumsfeld by the President, George W. Bush, after the elections.  
 
-## Political Behaviors Undertaken, 2006
+### Political Behaviors Undertaken, 2006
 
 The immediate slate of military actors who participated in the "Revolt of the Generals" consisted of six retired military officers, including Army Major General Paul Eaton, Marine Lieutenant General Greg Newbold, Army Major General John Batiste, Marine Lieutenant General Paul Van Riper, Army Major General John Riggs, and Army Major General Charles Swannack. In chapter three of this dissertation, which examined public opinion commentary authored by retired military actors, I discussed the behavior of retired military officers in broad detail, and so I will not readdress those considerations here. 
 But it is important to point out that the six retired generals who participated in the "Revolt of the Generals" were unique in several ways. To begin with, these officers had only very recently retired. In fact, these officers had participated directly themselves in the very subject matter they addressed during the "Revolt." Eaton, for example, had been responsible for training the Iraqi military from 2003 - 2004, and both Swannack and Batiste had served as Army Division Commanders on the ground in Iraq [@cloud_more_2006]. The recent retirements of the military actors participating in the "Revolt" is important mostly because it signified that at least for several of the actors, they had deliberately chosen to retire and speak out _rather than_ remain in uniform. 
@@ -175,14 +173,14 @@ Perhaps it is impossible to accurately measure the influence of the "Revolt of t
 
 The "Revolt" did not violate the principle of non-interference, however. The military officers who participated in the revolt addressed topics that were in accord with reasonable expectations of military expertise, as noted in the previous section. In other words, the revolting officers' remarks did not address topic areas or issues that are far outside of the relevant expertise of military officers. 
 
-### Summary
+### Summary of the "Revolt of the General"
 
 The 2006 "Revolt of the Generals" was a significant episode in US civil-military relations. Among the high profile civil-military conflicts that have occurred in US history, the "Revolt" was unique in that several recently retired military generals, all of whom had served either in Iraq or been directly involved in its planning, called on the Secretary of Defense to step down. Additionally, the episode sparked renewed interest in the topic of military officer resignation and the conditions under which resignation is ever appropriate, a topic that remains hotly contested to this day [@m_shields_introduction_2017].  
 
 The "Revolt of the Generals" violated the principles of civilian control, and to a lesser degree, the principle of non-partisanship. However, the episode did not violate the principle of non-interference. Critics of the "revolting" generals generally take issue not with the substance of the critiques levied by the outspoken officers, but with the manner and forms of behaviors used by these officers [@cook_revolt_2008; @binkley_revisiting_2020]. Supporters of these officers, on the other hand, tend to acknowledge the severity of the behaviors employed by the military actors who undertook the "Revolt", but nonetheless argue that the national good was ultimately better served as a result of the episode having occurred [@kagan_let_2006]. 
 
 \singlespace
-# Part 2 - Domestic Unrest and the US Withdrawal from Afghanistan, 2020-2021
+## Part 2 - Domestic Unrest and the US Withdrawal from Afghanistan, 2020-2021
 \doublespace
 
 Approximately 14 and 15 years after the "Revolt of the Generals," an incredible flurry of political activity involving the military again occurred, this time centering on several tumultuous political events in 2020 and 2021. These events included a period of domestic civil unrest that occurred in the Spring and Summer of 2020, the 2020 Presidential Election and its aftermath, and the US withdrawal from Afghanistan in 2021. 
@@ -191,7 +189,7 @@ Before describing the political activities involving the military that occurred 
 
 These paragraphs should not be considered the definitive guide to polarization in the United States over the past fifteen years. For instance, scholars continue (and likely will) to unfold the dynamics that led to the election, and the stunning presidency, of Donald Trump [for instance, see @skocpol_upending_2020]. This is in itself a major story that cannot be unpacked in this dissertation. Still, the following paragraphs argue that from 2006 - 2021, many of the political topics that generated controversy did so in part because they involved a significant difference in morals, values, and worldviews.   
 
-## Increasing Polarization Between 2006 - 2021
+### Increasing Polarization Between 2006 - 2021
 
 Occurring two and a half years after the "Revolt of the Generals," the election of President Obama in the fall of 2008 was significant for many reasons. During his first term in office, the Democratic President sought and ultimately succeeded at instituting a number of major policy reforms. One of the earliest and most consequential of these policy initiatives was "Obamacare," formally known as the _Affordable Care Act_, which significantly overhauled the nation's healthcare system. President Obama also sought to provide generous economic assistance by overseeing passage of the _American Recovery and Reinvestment Act_ in order to revitalize the national economy after a severe financial crisis in 2008 [@conlan_american_2016]. 
 
@@ -206,7 +204,6 @@ Several of these flashpoints in particular stand out. The 2012 death of Trayvon 
 Other flashpoints occurred on the cultural fronts of sexuality, gender, and identity. For instance, in 2015, the Supreme Court ruled in _Obergefell v. Hodges_ that the 14th Amendment of the Constitution guarantees the right of two persons of the same sex to marry [@gilkis_obergefell_2018]. The following year, the Obama Administration ended the prohibition on transgender troops serving in the US military, a prohibition that Trump would later reinstate, and that President Biden would once again end in 2021 [@lopez_obama_2016; @jackson_trumps_2019; @feldscher_biden_2021]. 
 
 In 2021 and into 2022, many debates involve this same set of issues - race, sexuality, and gender - even as the application of these issues involve different contexts. One recent example is a bill passed in Florida in March of 2022 related to what topics school instructors in kindergarten through grade three may (and may not) discuss with their students with respect to the concepts of sexuality and gender identity. Dana Goldstein of _The New York Times_ (2022) fascinatingly captures the moral division over this bill. She notes that supporters of this highly controversial legislation refer to the bill as the "Parental Rights in Education" bill, whereas opponents call it the "Don't Say Gay" bill [@goldstein_opponents_2022]. 
-
 A second contemporary example involves transgender athletes, and whether, for example, athletes who identify as female but who were born as biological males should be allowed to compete in organized women's sports.^[In March 2022, a University of Pennsylvania swimmer, Lia Thomas, has most recently awakened this discussion at the national level. See @henderson_caitlyn_2022 for more information.] One of the foundational debates over this issue and larger debates over transgender rights seems to involve the concept of equality and in particular, how the concept of equality should be applied in certain situations. Does a high view of equality mean that there is a sacred space for women's athletics, and thus that biological males should be excluded, or does a high view of equality mean disposing of the constructs of gender and biological sex altogether [@kurtzleben_political_2021]? 
 
 ### Rising Polarization and the Military
@@ -217,7 +214,7 @@ The theory offered in chapter two answers both of these questions with a resound
 
 If in fact "the public square is nothing more than a battleground of gods, each vying to push the levers of power in its favor," then a highly polarized society signifies that the gods competing against each other stand for a set of values that are highly opposed to each other [@leeman_political_2016, 82]. With this understanding in mind, military actors care a great deal about these types of topics, even if they do not care about every one of these topics to the same degree. As polarization rises, then, military actors will increasingly encounter situations in which they have to choose between adhering to the principles of civil-military relations, or obeying the values and morals that they hold dear. As polarization rises, more military actors will obey the values and morals with which they identify, and in the process, violate the central principles of civil-military relations. 
 
-## Political Behaviors Undertaken, 2020-2021
+### Political Behaviors Undertaken, 2020-2021
 
 From June 2020 - September 21, I trace two distinct sets of political behavior, each of which occurred at the front and back of this roughly 16 month-long period. The first set includes the reaction of several high profile military officers, to include retirees as well as active duty officers, to racially fueled civil unrest in the aftermath of the murder of George Floyd, an unarmed black man at the end of May 2020. The second set of behaviors involves the response of civilian and military actors to the US withdrawal from Afghanistan and simultaneous revelations that the Chairman of the Joint Chiefs of Staff had engaged in two questionable phone calls before and after January 6, 2021. 
 
@@ -225,7 +222,7 @@ This date, January 6, 2021, matters significantly, especially in terms of unders
 
 Through the lens of the theory offered earlier in this dissertation, the political activities involving the military undertaken in June of 2020 and in September 2021 are not merely two aberrations from a domestic political environment that was otherwise marked by relatively stable adherence to the central principles of civil-military relations. Instead, these two episodes clearly illustrate the tension and instability in civil-military relations that arise as a result of extremely high levels of polarization when the level of military prestige is also relatively high. 
 
-## Civil Unrest in June of 2020
+### Civil Unrest in May-June, 2020
 
 On May 25, 2020, Minneapolis police officer Darek Chauvin knelt on the neck of George Floyd, an unarmed black man, resulting in Floyd's death. Video footage of the incident understandably outraged many Americans. Within days, the incident ignited a national level conversation about racism in the US, and quickly led to a number of riots, protests, and a general period of civil unrest across many American cities. By June 8, 2020, at least 19 Americans had been killed in violence directly related to this unrest [@mcevoy_14_2020].
 
@@ -243,7 +240,7 @@ The military actors who made public appeals in June 2020 addressed a number of t
 
 The public appeals undertaken by many of the military actors, particularly several of the retired generals, explicitly mentioned or strongly alluded to Donald Trump personally, and in so doing, violated the central principle of civilian control of the military. The public statements made by the active duty service chiefs carefully steered clear of doing so, and thus did not violate the principle of civilian control. Previous scholarship has pointed out that observers of these public appeals can make reasonable arguments both in support of and in opposition to the behavior undertaken by these retired officers [@brooks_let_2020]. Still, that a number of officers undertook public appeals in the context of one major incident, and that some of these very clearly argued against what the President had considered (or was considering at the time), marked this set of political behaviors as unique. 
 
-## The US Withdrawal from Afghanistan, 2021
+### The US Withdrawal from Afghanistan, 2021
 
 Just over a year later, in August 2021, the Taliban in Afghanistan handily and quickly overtook the remnants of the central Afghan government, and the US withdrew all military forces from Afghanistan. This withdrawal of military forces from Afghanistan was both unsurprising and very much a surprise, depending on how one viewed the context in which this development took place.
 
@@ -272,7 +269,6 @@ The critical question was whether such conduct deserved to be praised or denounc
 In the wake of these revelations, civilian actors and retired military officers accused General Milley and the Defense Department of three separate offenses, all of which had emerged simultaneously in August and September 2021. First, these actors charged Milley and Secretary Austin with strategic ineptitude resulting in the humiliating withdrawal of US forces from Afghanistan. Second, these actors charged Milley in particular of treasonous behavior by revealing military intent to Chinese forces. Third, military and civilian actors accused Milley of violating the chain of command by speaking with Pelosi about the Commander in Chief's state of mind. Both sets of actors, civilian and military, explicitly called on Milley and in some cases, Lloyd Austin, the Secretary of Defense, to resign.  
 
 In bruising Congressional testimony held on September 28 and 29, 2021, multiple GOP lawmakers assailed Milley. Senator Tom Cotton, as mentioned in this chapter's introduction, implied that Milley should have resigned if the General believed that the President's decision _not_ to leave 2,500 Troops in Afghanistan would result in strategic mission failure [@singman_milley_2021]. Others blasted Milley for conversing with a Chinese General. Representative Vicky Hartzler, for instance, told Milley that, "I think you articulating that, that you would tell him, you would give him a call, I think is worthy of your resignation" [@hartzler_icymi_2021]. Senator Marco Rubio, as another example, wrote a letter to President Biden, insisting that Milley's actions "threatened to tear apart our nation's longstanding principle of civilian control of the military" [@rubio_rubio_2021]. Several other GOP lawmakers called on Milley to at least be thoroughly investigated, including Congressmen Jim Banks of Indiana, Doug Lamborn of Colorado, Rob Wittman of Virginia, Mike Gallagher of Wisconsin, and Senator Joni Ernst of Iowa [@zempel_pack_2021].   
-
 Several military actors echoed these calls. Retired General Don Bolduc, for example,  stated, "I believe his (Milley's) actions are irresponsible and they fall somewhere between treason and dereliction of duty" [@fox_news_staff_retired_2021]. And more than 180 retired flag officers (generals and admirals) known as the _Flag Officers 4 America_ signed an open letter calling on both General Milley and Secretary of Defense Lloyd Austin to resign [@flag_officers_4_america_retired_2021]. This group previously penned an open letter suggesting that the 2020 Election had been stolen from Donald Trump, further attesting to the high level of polarization that prevailed during 2020 and into 2021 [@bender_disturbing_2021].
 
 ### Impact of Undertaken Behaviors
@@ -292,7 +288,7 @@ The implications of Finer's warning are both profound and highly relevant to tod
 It is also worth pointing out that as significant as the Truman - MacArthur episode in the 1950s was, the political environment then was much less polarized than it is today. In highly polarized environments, the theory offered in this dissertation suggests that military leaders who decide to act contrary to the wishes of their commander in chief will instead obey in accordance with his or her highest moral commitments, whatever these might be. Thus, if future military leaders learn that following Milley's example is proper, Americans have no other recourse than to hope that the military leader who finds himself or herself in such a position will have the individual fortitude to make wise decisions, as Milley perhaps did, and as General Grant did more than 150 years ago. But determining what is wise in the first place in a polarized environment is likely to prove far from easy. That Americans should find their military leaders ever in a position to have to make these types of decisions is neither desirable nor sustainable for an extended period of time.   
 
 \singlespace
-## How Levels of Polarization and Prestige Shaped Political Behaviors after Domestic Civil Unrest in 2020 and the US Withdrawal from Afghanistan in 2021
+### How Levels of Polarization and Prestige Shaped Political Behaviors after Domestic Civil Unrest in 2020 and the US Withdrawal from Afghanistan in 2021
 \doublespace
 
 It is vital to underscore how a high level of polarization contributed to military and civilian actors undertaking the political activities they engaged in during the events examined in 2020 - 2021. Through this lens, the death of George Floyd was a flashpoint resulting in nationwide conversations about and reflections upon racism in the United States. Many of the military actors who made public appeals were willing to push the limits of, and in some cases violate, the principles of civil-military relations because they felt very strongly that in considering the use of active duty military forces to suppress domestic unrest, President Trump was considering a course of action that would have suppressed the right of citizens to peacefully protest, in violation of the Constitution. 
@@ -329,17 +325,17 @@ In actuality, Gaetz may have genuinely been disappointed by the outcome of Afgha
 
 These types of remarks also, in a very real sense, violated the principle of civilian control. This is the case because by primarily focusing on obtaining a partisan advantage, the ability to genuinely study and learn from foreign policy failure - in this case, the US mission in Afghanistan - was likely degraded [@schultz_perils_2017]. Congress has the duty to perform oversight of the military. But exercising and implementing this oversight, a key component of the principle of civilian control, cannot and will not occur if the primary lens through which civilian actors look is one of perpetual partisan advantage.
 
-### Summary
+### Summary of Political Behavior Involving the Military Undertaken in 2020-2021
 
 The 15 month period from June 2020 - September 2021 included several significant periods of political activity involving the military. This period included weeks of tumultuous domestic unrest in June 2020 and the US withdrawal from Afghanistan in 2021. The latter episode occurred alongside of revelations that the senior military officer in the US, the Chairman of the Joint Chiefs of Staff, had engaged in phone calls with a Chinese General and the Speaker of the House. In both 2020 and in 2021, the US military found itself front and center in much of the political conversation occurring in the United States.  Some were proud of how the military handled itself, and others, as this section of the chapter has noted, took great issue with the actions of military leaders.   
 
-# Comparison and Contrast of Behaviors, 2006 and 2020-2021
+## Comparison and Contrast of "The Revolt" and Political Activity Undertaken in 2020-2021
 
 Both the "Revolt of the Generals" and the political activities involving the military undertaken during the Summer of 2020 and after the US withdrawal from Afghanistan in 2021 were significant. In both episodes, military and/or civilian actors engaged in visible political behaviors that violated the principles of civil-military relations.
 
 Yet the "Revolt of the Generals" and the political activities involving the military undertaken in 2020 - 2021 differ in important ways as well. The main difference between the political environment that prevailed in each episode is that during the "Revolt of the Generals," the level of polarization that prevailed was relatively lower than that which existed during the Summer of 2020 and after the withdrawal from Afghanistan in 2021. According to Table \@ref(tab:poss-environment3), the political activities undertaken amid a higher level of polarization should be marked by a more comprehensive type of politicization, more extreme levels of political activity, and significant potential for civil-military conflict, than those undertaken when the level of polarization is lower, even as the level of military prestige remains high. 
 
-## Comprehensive Politicization
+### Comprehensive Politicization
 
 In my view, a comparison of the "Revolt of the Generals" in 2006 and the political activities undertaken in 2020 and 2021 reveals that the latter episode was in fact marked by comprehensive politicization, a more extreme level of political activity, and significant (rather than high) potential for civil-military conflict. First, the politicization of the military undertaken in 2020 and 2021 was more comprehensive than the "Revolt of the Generals." This is most clearly seen, perhaps, in the fact that the political activities comprising the "Revolt of the Generals" were voluntary acts committed primarily one type of actor (military), whereas the latter episode of 2020-2021 involved behaviors that were somewhat inescapable and committed by both types of actors.
 
@@ -349,7 +345,7 @@ Had the revolting generals never written the public appeals they actually author
 
 On the other hand, had Milley _not_ de-escalated with the Chinese General, or had refused to speak with the Speaker of the House after January 6, 2021, would civilian and military actors accused him of failing to fulfill his responsibilities, or of violating his oath of office? Though it is a conjecture, the theory and cases examined in this dissertation suggest that Milley would have been criticized, but from the opposite political direction than the criticism he endured for engaging in these calls. Indeed, just as several Republicans tore into Milley for actually engaging in these phone calls, it is likely that several Democrats would have strongly criticized Milley for _not_ engaging in the same phone calls, or for not expressing dissent in some way amid a very turbulent period of time. Unlike the revolting generals in 2006, General Milley in 2020 and in 2021, to a certain extent, was in a foreordained lose-lose situation: by engaging in the actions that he did, he became a hero to one political side and a traitor to the other. This reality underscores the comprehensiveness of the politicization that can occur in highly polarized settings and when the military institution is relatively prestigious.  
 
-## Extreme Political Activity
+### Extreme Political Activity
 
 Second, the political behavior undertaken in 2020 and in 2021 involving the military involved political activity that was more extreme than that undertaken in 2006 during the "Revolt of the Generals." As mentioned several times during this chapter, this should not be understood as downplaying the "Revolt of the Generals," or by condoning the behavior undertaken by the revolting officers. But there are clear differences in the way in which the two episodes involved extreme forms of political activity. 
 
@@ -361,7 +357,7 @@ During the political activities undertaken by military and civilian actors in 20
 
 In calling for Milley to resign, some voices _harshly_ criticized the President, Joe Biden. This is important especially insofar as at the time of the withdrawal from Afghanistan, President Biden had been in office for less than eight months, and had inherited a war that was nearly 20 years old and overseen by Presidents of both political parties. Congressman Matt Gaetz's remarks, referenced earlier in this chapter (he labeled President Biden, "addled"), clearly testify to this fact [@gaetz_ending_2021]. Others calling for or intimating that Milley resign, such as Senator Tom Cotton, were among those who, the previous year, had taken public positions regarding the use of military force to suppress domestic civil unrest that were aligned with those favored by President Donald Trump.^[Cotton, for instance, had published an op-ed in the _New York Times_ entitled "Send in the Troops," in which he had stated, "This venerable law (_The Insurrection Act_), nearly as old as our republic itself, doesn't amount to 'martial law' or the end of democracy, as some excitable critics...have comically suggested. In fact, the federal government has a constitutional duty to the states to 'protect each of them from domestic violence.'" See @cotton_send_2020 for more details. Cotton's views on the domestic use of force thus became the object of scorn by those retired military officers who spoke out against the use of domestic military force.]
 
-## Significant Potential for Civil-Military Conflict
+### Significant Potential for Civil-Military Conflict
 
 Finally, the political activity undertaken as part of the "Revolt of the Generals" differs from that undertaken in 2020 and in 2021  "Revolt of the Generals" in that during the latter, there was significant potential for civil-military conflict rather than high potential for conflict. The clearest evidence for this assertion stems from the fact that the latter episode occurred amid the background of what should be considered near to either a constitutional crisis, or at least approaching such a crisis. The "Revolt of the Generals," on the other hand, while serious, did not rise to the level of a constitutional crisis, nor occur amid an ongoing one stemming from another situation. 
 
@@ -377,7 +373,7 @@ One final important way in which the two episodes differ is in their impact on t
 
 The political activity conducted in 2020 and in 2021, on the other hand, did little to advance, sharpen, or improve the status of American foreign policy. To begin with, the political activity undertaken by military actors in 2020 concerned the domestic rather than foreign or external use of military forces. But even in 2021, when the catalyst for much of the political activity undertaken was a major foreign policy event (the sudden withdrawal of US forces from Afghanistan), the simultaneous revelation of General Milley's phone calls resulted in the inclusion of polarizing domestic politics. As a result, much of the national conversation in September 2021 steered towards domestic politics, rather than truly ascertaining the reasons for America's 20 year long mission to Afghanistan ending the way that it did. 
 
-# Comparison of Case Studies
+## Comparison of Case Studies
 
 This section of the chapter compares and contrasts the case study undertaken in this chapter with that which was explored in the previous chapter. Because the level of military prestige was the main independent variable that changed in the previous chapter, and polarization was the main independent variable that changed in this chapter, there should be portions of each case study that are similar to the other. 
 
@@ -389,7 +385,7 @@ In 2020 and in 2021, many military actors (retired officers especially) similarl
 
 Further similarities to the domestic environment in 1867-1868 and 2020-2021 are evident in the fact that in both periods, high polarization had contributed to constitutional crises occurring in each era. During the earlier period, the previous chapter noted that Congress eventually passed the _The Tenure of Office Act_, the design of which was to curtail Johnson's presidential power. Johnson was ultimately impeached in 1868 for violating this act. In 2020-2021, the results of the 2020 Presidential Election were questioned, the US Capitol subsequently attacked, and President Trump impeached. In both instances, highly polarized environments strongly shaped the views and the behaviors of civilian and military actors.
 
-## Conclusion
+### Conclusion
 
 This chapter did not seek to test outright any of the five hypotheses presented previously in this dissertation. Yet the exploration of the two episodes explored in this chapter, both of which occurred in the post-9/11 environment, has helped further confirm both H4 and H5. H4 states that military and civilian actors engage in relatively more visible and public forms of political behavior when military prestige is high relative to periods of low military prestige. H5 states that the most extreme levels of political activity occur in environments characterized by simultaneously high levels of political polarization and military prestige. 
 

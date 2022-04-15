@@ -1,10 +1,12 @@
+# Chapter One - Framework
 
-# Chapter One {-}
 \singlespace
->"No soldier gets entangled in civilian pursuits, since his aim is to please the one who enlisted him" --- 2 Timothy 2:4, The Bible
+>_"No soldier gets mixed up in civilian matters, for his aim is to please his commanding officer."_
+--- 2 Timothy 2:4 (Greek Inter-linear Translation)
+
+
 
 \doublespace
-
 Scholars, civilians, diplomats, and military leaders regularly discuss why and how militaries intervene in politics. These discussions, moreover, often include the theoretical question of whether military actors _should_ intervene in politics, to what degree, and why. 
 
 Though it would be impossible to list all of the contemporary instances in which the US military has become entangled in politics, several stand out. From former President Trump's appointment of several retired military officers to key postings within his administration [@brooks_dont_2016], the removal of Navy Captain Brent Crozier for leaking a letter to the press in which he castigated the chain of command's response to the onset of the COVID-19 pandemic [@associated_press_teddy_2020], and the remarkable panoply of senior retired military officers excoriating former President Trump after threatening to use active duty forces to quiet protests and riots in cities across America during the summer of 2020 [@brooks_let_2020-1], there is no shortage of events which illustrate the many challenges of dealing with the military in polarizing times. 
