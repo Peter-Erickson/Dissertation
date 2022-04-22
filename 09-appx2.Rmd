@@ -1,0 +1,163 @@
+# Appendix to Chapter Four {-}
+
+This chapter Appendix roughly aligns with the chronological order of the chapter. 
+
+\singlespace
+## Note on the Campaign Media Analysis Group and its Role in the Data
+\doublespace
+
+WiscAD and WMP gather the television advertisements with the assistance of a commercial company, the Campaign Media Analysis Group (CMAG). CMAG provides several pieces of information when releasing the data, such as the media market in which a particular advertisement aired, the estimated cost of running a particular advertisement, the time of day the advertisement was run, and other variables. A group of scholars and graduate students affiliated with WiscAD and WMP then conduct additional coding on the advertisements. This coding varies to some extent by election cycle, but otherwise remains markedly similar. The additional variables that are coded for in each election cycle include items such as the specific issues that an advertisement mentions or addresses during the advertisement, whether a candidate is featured during the advertisement, and whether a given advertisement takes on a negative tone, and more. 
+
+Cleaning the data from five separate data sets was a considerable project. I had to merge several variables and implement a common naming scheme across the data in order to enable a meaningful comparison of the data over time. It was also a considerable project to map county population and county veteran population data onto media markets.  
+
+## Descriptive Statistics Overview Table
+
+Table \@ref(tab:desc-stats-ch4-appx) displays, for each election cycle, the total number of airings of advertisements and the percentage of these advertisements that are entirely thematic of issues pertaining to defense, national security, and/or veterans issues. 
+
+```{r desc-stats-ch4-appx-prep, include=F, echo=F, warning=F, message=F}
+
+# total # of airings by election cycle
+# comment out  ch4_airings_analysis %>% select(Elec_Cycle, creative) %>% group_by(Elec_Cycle) %>% count()
+
+# percentage of each election cycles airings that were defense/vet/security themed
+# comment out  ch4_airings_analysis %>% select(Elec_Cycle, creative, def_vet_ad_theme) %>% group_by(Elec_Cycle) %>% # summarise(avg_def_theme=mean(def_vet_ad_theme))
+
+desc_stats <- tribble(
+  ~'Election Cycle', ~'Total Airings', ~'% Airings Defense/Vet/Security Themed',
+  "2000", "267,359", ".7", 
+  "2004", "795,631", "21.6", 
+  "2008", "1,053,675", "7.7", 
+  "2012", "1,417,984", ".8", 
+  "2016", "996,392", "15.6", 
+  "2000-2016", "4,531,041", "9.3")
+```
+
+```{r desc-stats-ch4-appx, include=TRUE, echo=FALSE}
+ 
+kable(desc_stats, booktabs=T, caption="Summary Statistics, The Military in Presidential Campaign Advertisements, 2000-2016") %>%
+  kable_styling(full_width = F, font_size=10.5, latex_options="striped") %>% 
+  column_spec(1:2, width="5em") %>% 
+  column_spec(3, width="11em") 
+
+
+```
+
+## Additional Regression Tables
+
+Here I present additional regression tables for the chapter. These regression tables do not include election cycle - campaign season fixed effects, and instead include the variables of polarization and the hostile military casualty levels (expressed as a rate) sustained by US forces in a given year. Values for polarization and lagged hostile casualty levels are assigned based on _when_ an advertisement is aired (logit) and what campaign season an advertisement belongs to (primary versus general). Because Congressional polarization is measured every two years, there is no difference in the value of polarization assigned to ads run during the primary verses general campaigns. There is a difference in an ads assigned hostile casualty level. For ads aired as part of an election cycle's primary campaign, I assign a lagged hostile casualty level that corresponds to the year _before_ the general election is held. That is, for all ads aired in the 2004 primary campaign, these take on a lagged hostile casualty value for 2003, because 2003 is when the primary campaign for the 2004 Presidential Election began. All ads aired in the 2004 General Election, however, take on a lagged hostile casualty level value for 2004.  
+
+I include a control for the level of congressional polarization in the US House and or US Senate, which comes from a measure of ideology based off of roll-call voting data over time [@jeffrey_b_lewis_voteview_2020]. Polarization is included as a control because one might suspect that civilians react to changing levels of polarization by featuring military figures in campaign ads in ways that increasingly challenge the principles of civil-military relations. 
+
+I also include a measure of military casualties, and I lag the measure by one year. I include a measure of casualties because it as plausible to think that the level of casualties sustained by US military forces shapes how civilian actors use military figures during campaign ads. I lag the level of casualties by one year because a previous year's casualty levels may be partly responsible for spurring the decision made by civilian candidates to design advertisements that feature military actors behaving in a particular manner.^[This variable is constructed from a number of sources, and consists of the number of hostile US casualties sustained in a given calendar year per 100,000 Active Duty military forces. I include in this measurement those casualties that are the result of what the Department of Defense classifies as either "hostile action" or a "terrorist attack." Annual data is provided from the Department of Defense from 1980-2010. I then used data from the Department of Defense regarding the wars in Iraq and Afghanistan to construct a measurement for years outside of this time range. See @department_of_defense_dcas_2011; @department_of_defense_dcas_2021; @department_of_defense_dcas_2021-1; @department_of_defense_dcas_2021-2; @department_of_defense_dcas_2021-3; @department_of_defense_dcas_2021-4; @department_of_defense_dcas_2021-5; @department_of_defense_dmdc_2021 for more details.] 
+
+\singlespace
+### Logistic Regression, without Election Cycle - Campaign Season Fixed Effects
+\doublespace
+
+Additional logistic regression results for chapter 4 are displayed in Table \@ref(tab:ch4regressionappx1). 
+```{r ch4-appx-rds read, include=F, echo=F, warning=F, error=F, message=F}
+## collapse all open data frames
+rm(list=ls())
+### Read in RDS files here###
+log2_milimg <- readRDS("data/ch4_log2_milimg.rds")
+log2_actdty_img <- readRDS("data/ch4_log2_actdty_img.rds")
+log2_vet_img <- readRDS("data/ch4_log2_vet_img.rds")
+log2_cmbt_img <- readRDS("data/ch4_log2_cmbt_img.rds")
+log2_appear <- readRDS("data/ch4_log2_appear.rds")
+log2_part_act <- readRDS("data/ch4_log2_part_act.rds")
+log2_endorse <- readRDS("data/ch4_log2_endorse.rds")
+log2_attack <- readRDS("data/ch4_log2_attack.rds")
+log2_nonint <- readRDS("data/ch4_log2_nonint.rds")
+```
+\singlespace
+```{r ch4appx-logit-reg-results, include=T, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+stargazer(log2_milimg, log2_actdty_img, log2_vet_img, log2_cmbt_img, log2_appear, log2_part_act, log2_endorse, log2_attack, log2_nonint, 
+          type="latex",
+          label="tab:ch4regressionappx1",
+          title="Logistic Regression Results, Chapter 4 Appendix, Without Election Cycle - Campaign Season Fixed Effects", 
+          covariate.labels = c('Per. Vet. Pop.', 'Libertarian', 'Other Party', 'GOP', 'Vet.Candidate', 'Sen. Polar.', 'Cas. Rate (lagged)'),
+          dep.var.labels = c('Mil. Img', 'Act. Dty. Img', 'Vet Img.', 'Combat Img.', 'Prom. Appearance', 'Any Viol.', 'Endorse', 'Attack', 'Outside Issues'),
+          model.names=F,
+          header=FALSE,
+          column.sep.width = "-15pt",
+          align=TRUE,
+          font.size="small",
+          no.space=TRUE,
+          omit.stat=c("f", "ser", "ll", "aic"),
+          float.env = "sidewaystable"
+          )
+
+```
+\doublespace
+
+Table \@ref(tab:ch4regressionappx1) indicates that even when fixed effects for election cycle - campaign season are removed, the coefficient for veteran density retains its staying power and its significance. Indeed, the coefficient for veteran density is positive and statistically significant in all nine models. 
+
+### OLS Regression Results, without Election Cycle - Campaign Season Fixed Effects
+
+Table \@ref(tab:ch4regressionappx2) displays OLS Regression Results when campaign cycle - election season fixed effects are removed.  
+
+```{r ch4appx-ols-reg-read, include=F, echo=F, warning=F, error=F, message=F}
+## read in file
+ch4_airings_reg_df_mkt_yr<-readRDS("data/ch4_OLS_data.rds")
+## construct regression models
+ols2_mil_img <- lm(mean_mil_img ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_actdty_img <- lm(mean_act_dty_img ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_vet_img <- lm(mean_vet_img ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_cmbt_img <- lm(mean_cmbt_img ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_hard_img <- lm(mean_hard_img ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_appear <- lm(mean_appearance ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_part_act <- lm(mean_part_act ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_endorse<- lm(mean_endorse ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_attack <- lm(mean_attack ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+ols2_nonint <- lm(mean_out_issues ~ percent_vet + sen_polar + HostCasRateLagged, data=ch4_airings_reg_df_mkt_yr)
+```
+\singlespace
+```{r ch4appx-ols-reg-results-2, include=T, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+stargazer(ols2_mil_img, ols2_actdty_img, ols2_vet_img, ols2_cmbt_img, ols2_appear, ols2_part_act, ols2_endorse, ols2_attack, ols2_nonint,
+          type="latex",
+          label="tab:ch4regressionappx2",
+          title="OLS Regression Results, Chapter 4 Appendix, Without Election Cycle - Campaign Season Fixed Effects",
+          covariate.labels = c('Per. Vet. Pop.', 'Sen Polar.', 'Cas. Rate (lagged)'),
+          dep.var.labels = c('Mil. Img', 'Act. Dty. Img', 'Vet Img.', 'Combat Img.', 'Prom. Appearance', 'Any Viol.', 'Endorse', 'Attack', 'Outside Issues'),
+          model.names=F,
+          header=FALSE,
+          column.sep.width = "-15pt",
+          align=TRUE,
+          font.size="small",
+          no.space=TRUE,
+          omit.stat=c("f", "ser"),
+          float.env = "sidewaystable"
+          )
+```
+\doublespace
+
+Table \@ref(tab:ch4regressionappx2) indicates that even after campaign cycle - election season fixed effects are removed, the coefficient for veteran density is positive in all models, and statistically significant in five of nine models, including in model 6, where the dependent variable indicates the proportion of advertisements aired during a particular media market's campaign season that features a military figure appearing prominently. 
+
+## Data Acknowledgement and Disclaimers 
+
+### 2000
+
+The data were obtained from a joint project of the Brennan Center for Justice at New York University School of Law and Professor Kenneth Goldstein of the University of Wisconsin-Madison, and includes media tracking data from the Campaign Media Analysis Group in Washington, D.C. The Brennan Center-Wisconsin project was sponsored by a grant from The Pew Charitable Trusts. The opinions expressed in this article are those of the author(s) and do not necessarily reflect the views of the Brennan Center, Professor Goldstein, or The Pew Charitable Trusts.
+
+### 2004
+
+The data were obtained from a project of the University of Wisconsin Advertising Project includes media tracking data from TNSMI/Campaign Media Analysis Group in Washington, D.C. The University of Wisconsin Advertising Project was sponsored by a grant from The Pew Charitable Trusts. The opinions expressed in this article are those of the author(s) and do not necessarily reflect the views of the University of Wisconsin Advertising Project or The Pew Charitable Trusts.
+
+### 2008
+
+The data were obtained from a project of the University of Wisconsin Advertising Project includes media tracking data from TNSMI/Campaign Media Analysis Group in Washington, D.C. The opinions expressed in this article are those of the author(s) and do not necessarily reflect the views of the University of Wisconsin Advertising Project.
+
+### 2012
+
+The data were obtained from the Wesleyan Media Project, a collaboration between Wesleyan University, Bowdoin College, and Washington State University, and includes media tracking data from Kantar/Campaign Media Analysis Group in Washington, D.C. The Wesleyan Media Project was sponsored in 2012 by grants from The John S. and James L. Knight Foundation and The John D. and Catherine T. MacArthur Foundation. The opinions expressed in this article are those of the author(s) and do not necessarily reflect the views of the Wesleyan Media Project, Knight Foundation, MacArthur Foundation or any of its affiliates.
+
+### 2016
+
+The data were obtained from the Wesleyan Media Project, a collaboration between Wesleyan University, Bowdoin College, and Washington State University, and includes media tracking data from Kantar/Campaign Media Analysis Group in Washington, D.C. The Wesleyan Media Project was sponsored in 2016 by a grant from The John S. and James L. Knight Foundation. The opinions expressed in this article are those of the author(s) and do not necessarily reflect the views of the Wesleyan Media Project, Knight Foundation, or any of its affiliates.
+
+### Other Acknowledgements
+
+All regression tables used were produced with the help of the Stargazer package, designed by Marek Hlavac [@hlavac_stargazer_2018].
+
+\pagebreak
+\singlespace

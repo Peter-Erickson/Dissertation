@@ -31,6 +31,7 @@ In summary, chapter two argued that rising military prestige presents an _opport
 Like chapter three, this chapter systematically investigates one distinct type of political behavior that is committed by one type of actor. In this chapter, the focus is on the use of military imagery and actors in campaign advertisements by civilian political candidates. Accordingly, this chapter will evaluate H3 directly, and help inform H4 and H5. H4 stated that military and civilian actors engage in relatively more visible and public forms of political behavior that involve the military institution when military prestige is high relative to periods of low military prestige, and H5 stated that the most extreme levels of overall political activity occur in environments that are characterized by simultaneously high levels of political polarization and military prestige. 
 
 Theoretically, the civilian use of military imagery and actors in campaign advertisements closely resembles three types of behaviors discussed in chapter two and noted in Table \@ref(tab:pol-behav-civ). The first and the closest is that of _Electoral Swaggering_, which I described as the use of military officers to attack or endorse political candidates running for office. The second behavior that the civilian use of military imagery and actors resembles is that of _The Military as Sales Reps_, which I defined as the use of military actors to garner support for civilian policies. The third type of behavior the civilian use of military imagery and actors in campaign advertisements most closely resembles is that of _Showcasing the Troops_, which I defined in chapter two as the use of military symbols and images in commercials or printed material. 
+
 In order to analyze this behavior, I examine all airings of presidential campaign advertisements on local television media markets (non-cable channels) in the five elections that occurred between 2000 and 2016, inclusively. This amounts to nearly 3,500 unique campaign ads aired more than 4.5 million times on more than 200 media markets in the United States. Media markets are, essentially, a grouping of geographic localities, and are used, among other reasons, to help track where particular advertisements are run. From 2000 - 2016, the level of public trust in the military (from Gallup polling and defined as the percentage surveyed that has a "great deal or quite a lot" of trust in the military) ranges from 64 (in 2000) to 82 (in 2003 and 2009) [@noauthor_confidence_2020]. In the calendar years in which the general election campaigns occur, the lowest value is 64 (2000) and the highest is 75 (2004 and 2012), however. 
 
 When we also factor in the credibility ratings of other predominant political institutions over the same period, a greater shift in what we might call "relative military prestige" becomes slightly more evident. For example, the gap between the percentage of Americans surveyed who expressed a "great deal or quite a lot" in the military compared to Congress was 40% (in favor of the military) in 2000 and 64% (also in favor of the military) in 2016. At the very least, the period from 2000 to 2016 generally saw relative increases in the prestige of the military. These increases are small when we consider trust in the military in its raw form, but larger when viewed in relative terms compared to Congress. 
@@ -80,7 +81,7 @@ include_graphics(here("data", "per-cap-cas.png"))
 
 ```
 
-Still, we can and should think through why veterans might choose to live where they do after their time in service, even if that is not the main purpose of this chapter. It could be that veterans simply move back to their homes, or the place from which they joined the military. Yet even if this is the case, Savell and McMahon's work (2020), as shown in Fig\@ref(fig:per-cap-cas-state), seems to suggest that military enlistment is not random! There are numerous possible reasons, including economic opportunities, partisanship, or even military culture that might shape why certain states tend to produce more soldiers, as a portion of that state's population, than other states. 
+Still, we can and should think through why veterans might choose to live where they do after their time in service, even if that is not the main purpose of this chapter. It could be that veterans simply move back to their homes, or the place from which they joined the military. Yet even if this is the case, Savell and McMahon's work (2020), as shown in Figure \@ref(fig:per-cap-cas-state), shows that military enlistment is not geographically evenly distributed. There are numerous possible reasons, including economic opportunities, partisanship, or even military culture that might shape why certain states tend to produce more soldiers, as a portion of that state's population, than other states. 
 
 It could also be that veterans seek to reside in areas of the country that offer distinct economic opportunities and benefits. Through this vein, it is important to consider, for example, that some states tax military retirement pay and others do not. For example, as of 2022, 26 of 50 states in the US do not tax military retirement income [@absher_5_2022]. A number of states provide other tangible economic benefits for vets, including reduced college tuition and property tax benefits. 
 
@@ -91,6 +92,27 @@ Viewed especially through the lens of economic benefits and opportunities, it is
 To see this linkage between veterans in the population and military prestige, recall that chapter two of this dissertation pointed out that the concept of prestige consists of two related components, the first involving the _centrality_ or _importance_ of an occupation or profession, and the second involving the perceived _skill_ or _excellence_ of the members of a particular occupation or profession [@davis_conceptual_1942; @jaco_prestige_1970]. Especially through the lens of the first component of prestige relating to the _centrality_ or _importance_ of an occupation or profession, the military likely is seen and considered as more _central_ and _important_ by the local population compared to areas that have relatively little exposure to the military. And if these same areas happen to be markedly more attractive for veterans to live and work, it follows, then, that a local area's portion of the population that is a veteran of the US Armed Forces is in fact a sound proxy for the variable of military prestige. 
 
 Said differently, it is reasonable to speculate that the military is in fact more central - and thus more prestigious - in the areas surrounding Norfolk, VA than it is to those surrounding San Francisco, CA. There is no available public opinion data, at least that I am aware of, that can prove this outright. However, if we consider that the military institution comprises a central part of the former area's economic base, so much so that one military online base guide says that in the state of Virginia, "the cities of Newport News, Hampton, Norfolk, Virginia Beach, and Chesapeake -- is the east coast epicenter of military activity," then using a measure of veterans in the population as a proxy for prestige seems plausible at the very least [@noauthor_hampton_nodate]. 
+
+Figure \@ref(fig:vetpop_county) displays the density of veterans in the population by county in the United States. The national average for veterans as a percentage of county population in the United States is 7.3%. The main takeaway from Figure \@ref(fig:vetpop-county) is that there is intrastate variation in the density of veterans as a percentage of the population. This suggests that there are complex factors beyond those that vary at only the state level in shaping where veterans reside. 
+
+``` {r vetpop-county-prep, include=F, echo=F, warning=F, message=F, error=F}
+dma_county_df <- readRDS("data/ch4_county_map_data.rds")
+
+vetpop_county_plot <- ggplot(data = dma_county_df, aes(geometry = geometry, fill=relative_cty_vet_pop)) + 
+  geom_sf(lwd=.015) + coord_sf(datum = NA) + theme_bw() +
+  scale_fill_manual(values=c("bisque", "pink", "darkorange", "red", "darkred"), name = "Vet %\nof Pop.", breaks=c("verylow", "low", "avg","high","veryhigh"), labels=c("less than 30% lower\nthan national average", "10%-30% lower\nthan national average", "within 10% of\nnational average", "10-30% higher than\nnational average", "more than 30% higher\nthan national average")) + #select colors and legend name
+  theme(plot.title = element_text(hjust = 0.5)) + #center title
+  labs(title = "Veteran Percentage of Population by County") +
+  guides(fill = guide_legend(ncol=3,nrow=2,byrow=TRUE), shape=guide_legend(ncol=3,nrow=2,byrow=TRUE)) + 
+  theme(legend.position="bottom") 
+
+```
+
+```{r vetpop-county, error=F, warning=F, message=F, include=T, echo=F, fig.cap="Veteran Percentage of the Population, by US County", fig.height=7, fig.width=6 }
+
+vetpop_county_plot
+
+```
 
 ### Civilian Use of Military Imagery and Actors in Campaign Ads
 
@@ -238,7 +260,7 @@ This section presents the data in order to help the reader better understand pat
 
 The first angle from which to observe the data involves the overall arc of US foreign policy over the period 2000 - 2016. Figure \@ref(fig:def-theme-mil-img) plots the proportion of each election cycle's advertisement airings that involve a clear defense or national security theme, feature military imagery of any type, and feature military imagery in ads that do _not_ involve a clear defense or national security related theme.
 
-While each of the three lines shown in Figure \@ref(fig:def-theme-mil-img) speaks to a slightly different factor, all three are indicative of how prevalent national defense and military issues are in campaign advertisements. Figure \@ref(fig:def-theme-mil-img)) also depicts the red and green lines, which track the portion of defense themed ads aired and the portion of airings that feature military imagery of any kind, as following a very similar trajectory. 
+While each of the three lines shown in Figure \@ref(fig:def-theme-mil-img) speaks to a slightly different factor, all three are indicative of how prevalent national defense and military issues are in campaign advertisements. Figure \@ref(fig:def-theme-mil-img) also depicts the red and green lines, which track the portion of defense themed ads aired and the portion of airings that feature military imagery of any kind, as following a very similar trajectory. 
 
 One likely reason for the variation in the proportion of airings featuring ads that contain a national security theme and the portion of airings containing military imagery involves the prominence of issues pertaining to national security and the military over time. For example, the relatively low portion of defense themed ad airings and airings featuring military imagery in the 2000 Election relative to 2004 and 2008 is not surprising. The September 11, 2001 attacks ushered in a distinct role for the military as the US conducted lengthy military operations, first in Afghanistan in 2001 and later in Iraq in 2003. 
 
@@ -382,9 +404,9 @@ In 2016 (for both parties) and during 2008 and 2012 (for Democrats), there was n
 
 The second noteworthy item of interest from Figure \@ref(fig:ch4-viol-overview) is the obvious and giant spike in the data during the 2004 Election Cycle, when the Democratic and Republican Parties aired a relatively high portion of advertisements that featured military actors who appeared prominently. This dynamic deserves a bit of an explanation about the 2004 Election itself.  
 
-During the 2004 Presidential campaign, a number of veterans, family members of veterans, and retired officers coalesced to attack the war record of the Democratic Candidate, Senator John Kerry. The group, which became an official political action committee known as the "Swiftboat Veterans for Truth," claimed that Kerry had exaggerated his war record and was undeserving of many of the heroic medals he had received [@ullman_whats_2008]. The group even published a book that turned out to be a _New York Times_ bestseller, whose title embodied the group's main charge against Kerry: "Unfit for Command" [@buckaloo_swiftboat_nodate]. 
+During the 2004 Presidential campaign, a number of veterans, family members of veterans, and retired officers coalesced to attack the war record of the Democratic Candidate, Senator John Kerry. The group, which became an official political action committee known as the "Swift Boat Veterans for Truth," claimed that Kerry had exaggerated his war record and was undeserving of many of the heroic medals he had received [@ullman_whats_2008]. The group even published a book that turned out to be a _New York Times_ bestseller, whose title embodied the group's main charge against Kerry: "Unfit for Command" [@buckaloo_swiftboat_nodate]. 
 
-Although it is hard to state conclusively, the attacks levied by the Swiftboat Veterans for Truth against Kerry were almost certainly effective, and likely damaged his chances of winning the Presidency. One scholar argues that the attack ads levied by the Swiftboat Veterans were effective because they featured real veterans as opposed to paid actors, thus lending at least a plausible semblance of veracity to their claims, and because the group perfectly timed the release of their ads to coincide with the "doldrums period between conventions," thus facilitating the ads garnering significant media exposure [@devlin_contrasts_2005, 292].^[It is not my central purpose to render a normative judgement on the actions, nor the intent of, the Swiftboat Veterans. One can reasonably conclude, in my view, that their behavior was inherently partisan, for the actions of the group contributed, at least in part, to the prevention of Kerry ascending to the Presidency. From this perspective, the actions of the Swiftboat Veterans must be viewed as wrong in that they violated the military's non-partisan ethic. On the other hand, I personally believe that one may take a different view of the actions of the Swiftboat Veterans. This alternate view emphasizes the fact that the Swiftboat Veterans began as an organic veterans group, and thus was not the brainchild or the creation of a political party. The group's founder, retired Admiral Roy Hoffman, insists that his actions were sparked only upon reading Douglas Brinkley's biography of Kerry, _Tour of Duty_, and gaining the impression that the book had significantly embellished Kerry's war record by making claims that were not true. Ultimately, many of Kerry's fellow veterans supported and backed Kerry, while others did not. See @rosin_unfriendly_2004 for a narrative of the beginning of the Swiftboat Veterans organization and @devlin_contrasts_2005 for a description of the group's activities.] 
+Although it is hard to state conclusively, the attacks levied by the Swift Boat Veterans for Truth against Kerry were almost certainly effective, and likely damaged his chances of winning the Presidency. One scholar argues that the attack ads levied by the Swift Boat Veterans were effective because they featured real veterans as opposed to paid actors, thus lending at least a plausible semblance of veracity to their claims, and because the group perfectly timed the release of their ads to coincide with the "doldrums period between conventions," thus facilitating the ads garnering significant media exposure [@devlin_contrasts_2005, 292].^[It is not my central purpose to render a normative judgement on the actions, nor the intent of, the Swift Boat Veterans. One can reasonably conclude, in my view, that their behavior was inherently partisan, for the actions of the group contributed, at least in part, to the prevention of Kerry ascending to the Presidency. From this perspective, the actions of the Swift Boat Veterans must be viewed as wrong in that they violated the military's non-partisan ethic. On the other hand, I personally believe that one may take a different view of the actions of the Swift Boat Veterans. This alternate view emphasizes the fact that the Swift Boat Veterans began as an organic veterans group, and thus was not the brainchild or the creation of a political party. The group's founder, retired Admiral Roy Hoffman, insists that his actions were sparked only upon reading Douglas Brinkley's biography of Kerry, _Tour of Duty_, and gaining the impression that the book had significantly embellished Kerry's war record by making claims that were not true. Ultimately, many of Kerry's fellow veterans supported and backed Kerry, while others did not. See @rosin_unfriendly_2004 for a narrative of the beginning of the Swift Boat Veterans organization and @devlin_contrasts_2005 for a description of the group's activities.] 
 
 ### Violations of Civil-Military Principles by Type
 
@@ -421,8 +443,9 @@ ch4_vetpop_tab <- kable(ch4_vetpop_stats,
 ch4_vetpop_tab
 ```
 
-Furthermore, Table \@ref(tab:top-bottom-vet-mkts) shows the top and bottom five ranked media markets by veteran percentage of the population in the data. The far right column also shows how many total presidential campaign ads aired in each of these media markets.
+Furthermore, Table \@ref(tab:top-bottom-vet-mkts) shows the top and bottom five ranked ranked media markets by veteran percentage of the population in the data. The far right column also shows how many total presidential campaign ads aired in each of these media markets. 
 
+\singlespace
 ```{r top-bottom-vet-mkts, include=T, echo=F, error=F, warning=F, message=F}
 ch4_vetpop_high_low <- tribble(~Market, ~Ranking, ~PercentVeteran, ~AdsAired,
    'Norfolk VA - NC', 1, 13.4, 61754,
@@ -444,6 +467,32 @@ ch4_vetpop_high_low_tab <- kable(ch4_vetpop_high_low,
             digits = 2)
 
 ch4_vetpop_high_low_tab
+```
+
+\doublespace
+Additionally, Figure \@ref(fig:vetpop-DMA) displays the density of veterans as a percentage of each media market in the US. The top and bottom five media markets are labeled, and correspond to the ten markets shown in Table \@ref(tab:top-bottom-vet-mkts).
+
+```{r vetpop-DMA-prep, include=F, echo=F, warning=F, error=F, message=F}
+
+dma_df_map <- readRDS("data/ch4_DMA_map_data.rds")
+
+dma_vet_plot <- ggplot(data = dma_df_map, aes(geometry = geometry, fill=relative_DMA_vet_pop)) + 
+  geom_sf(lwd=.6) + 
+  coord_sf(datum = NA) + theme_bw() +
+  scale_fill_manual(values=c("bisque", "pink", "darkorange", "red", "darkred"), name = "Vet. %\nof Pop.", breaks=c("verylow", "low", "avg","high","veryhigh"), labels=c("less than 30% lower\nthan national average", "10%-30% lower\nthan national average", "within 10% of\nnational average", "10-30% higher than\nnational average", "more than 30% higher\nthan national average")) + #select colors and legend name
+  theme(plot.title = element_text(hjust = 0.5)) + #center title
+  labs(title = "Veteran Percentage of Population by DMA",
+       x="",
+       y="") +
+  guides(fill = guide_legend(ncol=3,nrow=2,byrow=TRUE), shape=guide_legend(ncol=3,nrow=2,byrow=TRUE)) + 
+  theme(legend.position="bottom") +
+  geom_sf_text(aes(label = DMA_rank), size = 4) 
+```
+
+```{r vetpop-DMA, include=T, warning=F, error=F, message=F, echo=F, fig.cap= "Veteran Percentage of the Population, by Media Market", fig.height=7, fig.width=6}
+
+dma_vet_plot
+
 ```
 
 Moreover, of the 211 different media markets that appear in the data, there are 64 media markets that appear in all five election cycles in the data. For these 64 markets only, Figure \@ref(fig:ch4-vetpop-mkt) depicts a series of plots where the x axis is the percentage of veterans in the population of these markets. The y axis in each of these plots is the portion of that market's total airings of presidential advertisements that feature military imagery, contain military figure appearances, or show military figures engaging in explicit acts that violate the principles of civil-military relations. For each plot shown, a simple line of best fit, in blue, is also shown. 

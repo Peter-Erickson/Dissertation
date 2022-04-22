@@ -1,4 +1,4 @@
-# Appendix to Chapter Three {-}
+# Appendix to Chapter Three
 
 This chapter Appendix roughly aligns with the chronological order of the chapter.   
 
@@ -52,7 +52,7 @@ TA1 <- quest_prof %>% rename(CivViol=CivConViol, PartViol=NonPartViol, IntViol=N
 TA1
 ```
 
-# Main Regression Results Using Strict Levels of Polarization. 
+## Main Regression Results Using Strict Levels of Polarization. 
 \doublespace
 
 The majority of this appendix presents the same results shown in the main body of chapter three, but using the non-smoothed levels of polarization. 
@@ -377,7 +377,7 @@ In models 5-8, where the dependent variable is the log of the odds that a partic
 Thus, the Trump Presidency years matter in terms of obtaining the positive and statistically significant results for polarization, but only a portion of the Presidency matters (2017 and 2017 matter when the dependent variable is the proportion that violates a central principle of civil-military relations, and only 2017 matters when the dependent variable is the log of the odds that a particular piece violates the principles).
 
 \singlespace
-## Robustness Checks to Interaction of Polarization and Military Prestige
+### Robustness Checks to Interaction of Polarization and Military Prestige
 \doublespace
 
 I now run a series of models that check to see if any interaction between polarization and military prestige matters. The results, which are displayed in Table \@ref(tab:ch3appx5), show that there is no meaningful impact of interacting polarization and military prestige, either when the dependent variable is the total number of pieces authored (model 1), the proportion of annual pieces that violate the principles of civil-military relations (model 2), or the log of the odds that a single piece violates one or more of the central principles (models 3 - 6). 
@@ -460,7 +460,7 @@ Table \@ref(tab:ch3appx5) shows that when we interact trust in the military with
 
 In short, there are really no consistent patterns that emerge when an interaction term between polarization and military prestige are included that merit noteworthy attention. 
 
-## Endogeneity Checks
+### Endogeneity Checks
 
 The last major item of interest in this appendix include a series of checks for endogeneity. In line with the theory developed in chapter two, the most potentially problematic relationship involves instances of political behavior that violate the principles of civil-military relations and the level of trust in the military (military prestige). We might be particular concerned that acts of political behavior, in this case, the writing of opinion commentary by retired military officers, somehow drives the level of trust the public places in the military in a meaningful way. 
 
@@ -504,7 +504,7 @@ stargazer(mod4_endog_1, mod4_endog_int, mod4_endog_int_nonpart,
 
 The results of Table \@ref(tab:ch3appx6) indicate that there is not a strong and statistically significant relationship between instances of violations to the principles of civil-military relations and the level of trust the public places in the military. The coefficients for instance of violation of any central principle (models 1 and 2) and violation of the principle of non-partisanship (model 3) are all statistically insignificant. The coefficients on the interaction terms in models 2 and 3 are likewise statistically insignificant. Therefore, at least with respect to the behavior of authoring opinion commentary, endogeneity does not appear to pose a significant problem. The level of trust the public places in the military is not the result of instances of opinion commentary violating the central principles of civil-military relations. 
 
-## Acknowlegements
+### Acknowlegements
 
 The author would like to thank participants from the UW-Madison International Relations Colloquium, held on 2 March 2021, for feedback on an early version of this project, which later formed the basis for this chapter of the dissertation. The author would also like to especially thank fellow US-Madison graduate student and cohort member Laura Felone, who agreed to do a "second reading" of all of the op-eds in this data set in order to verify the coding scheme used. 
 

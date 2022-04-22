@@ -1,0 +1,227 @@
+---
+geometry: margin=1in
+output: 
+  bookdown::pdf_document2:
+    number_sections: FALSE
+    #indent: true
+    toc: false
+  #bookdown::pdf_document2: default
+reference-section-title: References
+bibliography: 
+  - dissertation.bib
+link-citations: true
+fontsize: 12pt 
+header-includes:
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{setspace}
+- \usepackage{sectsty}
+- \usepackage{paralist}
+- \usepackage{fancyhdr}
+- \usepackage{lastpage}
+- \usepackage{indentfirst}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{xcolor}
+- \usepackage{caption}
+- \usepackage{rotating, graphicx}
+- \usepackage{dcolumn}
+- \usepackage{ragged2e}
+---
+
+```{r loading-library, include=FALSE, echo=FALSE}
+library("here")       # file paths
+library("tidyverse")  # workhorse package
+library("tidylog")
+library("kableExtra")
+library("knitr")
+library("ggdag")
+library("dagitty")
+library("gridExtra")
+library("broom")
+library("dplyr")
+library("reshape2")
+library("pacman")
+library("ggrepel")
+library("writexl")
+library("lme4")
+library("bucky")
+library("scales")
+library("stargazer")
+library("rstatix")
+library("brglm")
+library("margins")
+library("IRdisplay")
+library("texreg")
+library("cowplot")
+library("mice")
+library("miceadds")
+library("bookdown")
+library("sandwich")
+library("mitools")
+library("modelsummary")
+library("sf")
+library("tidycensus")
+```
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+
+\subsectionfont{\raggedright}
+\subsubsectionfont{\raggedright}
+
+\pagenumbering{gobble}
+
+\begin{centering}
+
+\vspace{1cm}
+\Large
+
+Inescapable: Polarization, Prestige, and\\ 
+the US Military in Politics \\
+\vspace{1.5 cm}
+\normalsize
+by \\
+\vspace{0.5 cm}
+Peter M. Erickson
+
+\vspace{1.5 cm}
+
+A dissertation submitted in partial fulfillment of \\ 
+the requirements for the degree of \\
+\vspace{1.5 cm}
+Doctor of Philosophy \\
+(Political Science) \\
+\vspace{2.5 cm}
+at the \\
+\vspace{.5cm}
+UNIVERSITY OF WISCONSIN-MADISON \\
+\vspace{.5cm}
+2022
+
+\vspace{1cm}
+\end{centering}
+
+Date of final oral examination: 05/09/2022
+
+\vspace{1.2 cm}
+
+The dissertation is approved by the following members of the Final Oral Committee: 
+\singlespace
+\vspace{1 cm}
+  Jon Pevehouse, Professor, Political Science, University of Wisconsin-Madison (Chair) \newline
+  Risa Brooks, Associate Professor, Political Science, Marquette University \newline 
+  Mark Copelovitch, Professor, Political Science and Public Affairs, University of Wisconsin-Madison 
+\newline
+  Andrew Kydd, Professor, Political Science, University of Wisconsin-Madison \newline
+  Nadav Shelef, Professor, Political Science, University of Wisconsin-Madison \newline 
+  Jessica Weeks, Professor, Political Science, University of Wisconsin-Madison  
+
+
+\newpage
+\mbox{}
+\vfill
+\begin{centering}
+\textcopyright Copyright by Peter M. Erickson \\
+All Rights Reserved \\
+\end{centering}
+
+\newpage
+
+\pagenumbering{roman}
+\Large
+\bf Abstract
+\normalsize
+\normalfont
+\spacing{1}
+
+This dissertation examines how varying levels of polarization and military prestige impact the US military's political involvement. The dissertation first develops and exposits three central principles of civil-military conduct that civilian and military actors should adhere to. These include the principles of civilian control of the military, the non-partisanship of the military institution, and non-interference of the military into certain realms of the state.  
+
+The dissertation then develops a theory that argues that the levels of political polarization and military prestige alter the degree to which civilian and military actors adhere to these central principles of civil-military relations. Chapters Three and Four set out to empirically prove the theory by analyzing observational data pertaining to distinct forms of political behavior conducted by military and civilian actors. Chapter Three examines the publication of opinion commentary (op-eds) by retired military officers, and Chapter Four examines the use of military symbols, images, and actors during presidential campaign television commercials. Chapters Five and Six then explore the theory through different eras in US history, including the post-US Civil War period and the post-9/11 era. 
+
+The main scholarly contribution of this dissertation is the articulation of why political behaviors involving the military occur in mature democracies such as the United States, and the development of a framework to measure and assess these behaviors. The main conclusion of this dissertation is that civilian and military actors adhere to the central principles of civil-military relations when polarization and military prestige exist at some level that is not extreme. However, when both variables operate at significantly high levels, it is unlikely that the central principles will be respected and obeyed. 
+
+\newpage
+\raggedright
+\newpage
+
+\Large
+\bf Acknowledgements
+\normalsize
+\normalfont
+\spacing{1}
+
+Completing a doctoral program is simply not possible without a significant degree of love, support, and encouragement from others. For this reason, it is important that I take some time to adequately thank those who helped make this incredible experience a reality.  
+
+First, I want to thank my wife, Laura, for her enduring love and support, not only during these past three years at the University of Wisconsin, but for the many years leading up to this point. Her positive attitude and encouragement, all the while dealing with a full household, have been tremendous. Thank you, Laura. You've been a great partner, and I love you. 
+
+My kids - Samuel, Madeline, Kate, Emily, and Lily - also deserve thanks. The joy that they exhibit on a daily basis, and the adventurous spirit that they possess, is a great encouragement to me. Moving around often is not easy, but they have shown great resilience adapting to whatever environment they find themselves in. And as much as I have enjoyed the experience of working on a Ph.D., the very best memories that I have of our time in Wisconsin are the incredible moments we have had together as a family - skiing at Granite Peak in Wausau, riding our mountain bikes together at Winman or at Blackhawk, or cruising the Manitowish Chain of lakes up North at the family cottage. What an adventure! 
+
+To my parents, Mike and Ruth Erickson, of Fallston, Maryland: thank you for instilling in me a desire to learn more, to read, to always grow, and incredibly, to humbly do one's best while seeking to honor God in the process. Both of you modeled for me - and for all of my siblings - how to work hard, but how to keep valuable perspective about life in the process. I've got a long ways to go still, but I never have to wonder what right looks like, because both of you lived it out every day.   
+
+I also want to thank the United States Army for the opportunity to earn a Ph.D., and before this, a Master's Degree at Princeton University as a General Wayne A. Downing Scholar from 2014 - 2016. Those years at Princeton awakened in me a desire to study civil-military relations in a deeper way, a desire that grew largely out of my operational experiences as an Army officer. I have the benefit now of hindsight to look back and see how those years at Princeton helped plant an intellectual seed that, in time, would grow and ultimately lead to the University of Wisconsin.  
+
+I am especially grateful to the many incredible leaders in the Army who encouraged and supported me in making a career decision that was "off the beaten path" for an infantry officer. In particular, thank you to Generals LaCamera, Calvert, Sims, Rainey, Admiral, and Renforth (USMC) for encouraging me to simply "go for it". To Dr. Robert Davis and the Advanced Strategic Planning and Policy Program (ASP3) team at the Command and General Staff College at Fort Leavenworth, KS, thank you for making this a world class experience. And to Dr. Don Snider, who taught an early course on civil-military relations while I was a yearling at West Point majoring in the Social Sciences Department, thank you for living out what it means to be both a christian and a military officer. I am so glad that we have been able to stay more in touch in recent years, and I am grateful that our shared interest in civil-military relations has helped make our friendship even more enriching. 
+
+I am also thankful for the incredible scholarly community at the Department of Political Science at the University of Wisconsin-Madison. I can honestly say that I will always be proud to be a Badger. Every member of my dissertation committee took time to invest in me, knowing full well that I was perhaps a bit different in terms of stage of life and experience from most graduate students. The faculty with whom I worked are that rare combination of good human beings _and_ world class scholars. A special thanks to my committee chair, Dr. Jon Pevehouse, for pushing me beyond what I thought I could do, and for being supportive of me and my family throughout our time here. And to Dr. Jessica Weeks, thank you also for challenging me, and for pressing me to think outside of my comfort zone. To Dr. Andy Kydd, thank you for being a great teacher in the several classes that I was fortunate to take with you. I greatly admire your sense of humor and your candor. Thank you, Dr. Risa Brooks, for agreeing to work with me, a total stranger at the time, and for being so generous with your time over these past few years. To Dr. Nadav Shelef, whom I still recall meeting for the first time as a prospective student, thank you for asking the hard questions, for demanding excellence of me, and for reading all drafts and revisions of my work with a careful eye. You have challenged me in ways that have no doubt made me both a better scholar and better military officer. And to Dr. Mark Copelovitch, thank you for being a part of my dissertation committee, and for providing valuable feedback along the way. 
+
+I benefited from several others who also provided significant assistance, and perhaps in less visible ways. Jason Struck helped me work with some of the advanced statistical tools and software employed throughout this dissertation. Dr. Alexander Tahk helped me incorporate and apply several advanced statistical models to portions of this research project, and more importantly, to better understand their implications. And Colonel J.P. Clark, an Army officer and a distinguished historian himself, read and made comments on several drafts of chapter five of this dissertation. That he freely gave his time and expertise to an aspiring political scientist is a testament to the kindness of the community of Army scholars who understand the intricacies of progressing through a rigorous doctoral program on a somewhat accelerated timeline. 
+
+Finally, I need to publicly acknowledge God's role in this journey, which words cannot adequately express. Between the pages of this dissertation, a whole other story was unfolding and being written in my own life over the past three years. The details themselves are not important, but I arrived to Wisconsin in June of 2019 mentally and emotionally exhausted. This occurred after my eighth combat tour and after a particularly busy season with the Army. For the past three years, God has sustained me in ways that enabled me to simply put one foot in front of the other, and to keep going. 
+
+Hebrews 4:16 says, "Let us then with confidence draw near to the throne of grace, that we may receive mercy and find grace to help in time of need." Suffice it to say, God gave me and my family the help and provision that we needed, at exactly the right time. That's what God does. He saves us. And He takes pleasure in doing it.    
+
+\newpage
+\raggedright
+\newpage
+\spacing{1}
+\tableofcontents
+\pagebreak
+\listoftables
+\pagebreak
+\listoffigures
+\pagebreak
+
+\spacing{2}
+\pagenumbering{arabic}
+<!-- \allsectionsfont{\centering} -->
+\setlength\parindent{24pt}\setlength{\parskip}{0.0pt plus 1.0pt}
+
+```{r child = '01-chapter1.Rmd'}
+```
+
+```{r child = '02-chapter2.Rmd'}
+```
+
+```{r child = '03-chapter3.Rmd'}
+```
+
+```{r child = '04-chapter4.Rmd'}
+```
+
+```{r child = '05-chapter5.Rmd'}
+```
+
+```{r child = '06-chapter6.Rmd'}
+```
+
+```{r child = '07-chapter7.Rmd'}
+```
+
+```{r child = '08-appx1.Rmd'}
+```
+
+```{r child = '09-appx2.Rmd'}
+```
+
+

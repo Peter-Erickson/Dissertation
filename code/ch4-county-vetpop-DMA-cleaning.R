@@ -1,4 +1,12 @@
 library("tidyverse")
+library("sf")
+library("tidycensus")
+library("readxl")
+library("stringr")
+library("here")
+library("writexl")
+
+
 # In this file, I basically clean several data sets from the US
 # Census Bureau and the Department of Veterans Affairs. The goal is to obtain one
 # ultimate file that contains the names of every county, the 
@@ -342,22 +350,6 @@ vet_DMA_stats %>% write_xlsx(here("data", "vet_DMA_final.xlsx"))
 vet_county_DMA_map <- vet_county_DMA_stats %>% select(CTYID, CTYNAME, STNAME, TVDMA, county_vet_percent, percent_vet_DMA) %>% mutate(across(where(is.character), .fns = toupper)) 
 
 
-## Now Get Geographic Shapes For Each County
-
-#get counties
-county_shapes <- get_decennial(geography = "county", 
-                               variables = "P001001", 
-                               year = 2010, 
-                               geometry = TRUE)
-
-#select homogeneous counties
-county_shapes_df <- county_shapes %>%
-  filter(!GEOID > 60) %>% #remove Puerto Rico
-  rename(population = value,
-         FIPS = GEOID) %>% 
-  tigris::shift_geometry() #shift Alaska and Hawaii down
-
-
 #load DMA-county cross-walk data
 county_fips_xwalk <- read_csv(here("data", "countygeodata2018.csv")) %>%  
   rename(CTYNAME = "County Name",
@@ -464,73 +456,134 @@ dma_county_df <- full_join(vet_county_DMA_map, county_fips_xwalk, by = c("CTYNAM
 
 ## make two new variables for relative range of values
 
+mean(dma_county_df$county_vet_percent)
+mean(dma_county_df$percent_vet_DMA)
+
 dma_county_df <- dma_county_df %>% mutate(
   relative_cty_vet_pop = case_when(
-    (county_vet_percent <=.0366) ~ 1,   ## lower than 50% lower
-    (county_vet_percent >= .0366 & county_vet_percent <=.05124) ~ 2,  ## 30-50% lower
-    (county_vet_percent >.05124 & county_vet_percent <=.06588) ~ 3,  ## 10-30% lower
-    (county_vet_percent >.06588 & county_vet_percent <=.08052) ~ 4, ## within 10% natl avg
-    (county_vet_percent >.08052 & county_vet_percent <=.09516) ~ 5, ## 10-30% higher
-    (county_vet_percent >.09516 & county_vet_percent <=.1098) ~ 6, ## 30-50% higher
-    (county_vet_percent >.1098) ~ 7),  ## more than 50% higher
+    (county_vet_percent <=.05124) ~ "verylow",  ## 30% lower or more
+    (county_vet_percent >.05124 & county_vet_percent <=.06588) ~ "low",  ## 10-30% lower
+    (county_vet_percent >.06588 & county_vet_percent <=.08052) ~ "avg", ## within 10% natl avg
+    (county_vet_percent >.08052 & county_vet_percent <=.09516) ~ "high", ## 10-30% higher
+    (county_vet_percent >= .09516) ~ "veryhigh"), ## more than 30% higher
   relative_DMA_vet_pop = case_when(
-    (percent_vet_DMA <=.0364) ~ 1,   ## lower than 50% lower
-    (percent_vet_DMA >= .0364 & percent_vet_DMA <=.05096) ~ 2,  ## 30-50% lower
-    (percent_vet_DMA >.05096 & percent_vet_DMA <=.06552) ~ 3,  ## 10-30% lower
-    (percent_vet_DMA >.06552 & percent_vet_DMA <=.08008) ~ 4, ## within 10% natl avg
-    (percent_vet_DMA >.08008 & percent_vet_DMA <=.09464) ~ 5, ## 10-30% higher
-    (percent_vet_DMA >.09464 & percent_vet_DMA <=.1092) ~ 6, ## 30-50% higher
-    (percent_vet_DMA >.1092) ~ 7))  ## more than 50% higher)
-    
-    
+    (percent_vet_DMA <=.04991) ~ "verylow",  ## 30% lower or more
+    (percent_vet_DMA >.04991 & percent_vet_DMA <=.06417) ~ "low",  ## 10-30% lower
+    (percent_vet_DMA >.06417 & percent_vet_DMA <=.07843) ~ "avg", ## within 10% natl avg
+    (percent_vet_DMA >.07843 & percent_vet_DMA <=.09269) ~ "high", ## 10-30% higher
+    (percent_vet_DMA >.09269) ~ "veryhigh"))  ## more than 30% higher)
+
+# change relative strength of DMA and county vet populations to factors
+dma_county_df$relative_cty_vet_pop <- as.factor(dma_county_df$relative_cty_vet_pop)
+dma_county_df$relative_DMA_vet_pop <- as.factor(dma_county_df$relative_DMA_vet_pop)
+
+class(dma_county_df$relative_cty_vet_pop)
+dma_county_df$relative_cty_vet_pop<-fct_relevel(dma_county_df$relative_cty_vet_pop, "verylow", "low", "avg", "high", "veryhigh")
+levels(dma_county_df$relative_cty_vet_pop)
+
+dma_county_df$relative_DMA_vet_pop<-fct_relevel(dma_county_df$relative_DMA_vet_pop, "verylow", "low", "avg", "high", "veryhigh")
+levels(dma_county_df$relative_DMA_vet_pop)
+
+
+# Now Get Geographic Shapes For Each County
+county_shapes <- get_decennial(geography = "county", 
+                               variables = "P001001", 
+                               year = 2010, 
+                               geometry = TRUE)
+#select homogeneous counties
+county_shapes_df <- county_shapes %>%
+  filter(!GEOID > 60) %>% #remove Puerto Rico
+  rename(population = value,
+         FIPS = GEOID) %>% 
+  tigris::shift_geometry() #shift Alaska and Hawaii down
 
 #join county_shapes_df to dma_county_df
 county_shapes_df <- county_shapes_df %>% select(-NAME, -variable, -population)
-full_map_data <- full_join(dma_county_df, county_shapes_df, by = "FIPS")
+dma_county_df <- full_join(dma_county_df, county_shapes_df, by = "FIPS")
+dma_county_df <- dma_county_df %>% filter(!relative_cty_vet_pop=="NA")
 
-
-
-### Make the Maps ###
-
-#group by DMA and spatial union to get DMA shapes
-dma_shapes <- full_map_data %>% 
+# create DMA map. 
+#First we have to make the shapes of the media markets. 
+# We use the st_union function in order to do this. 
+dma_df_map <- dma_county_df %>%
   group_by(TVDMA) %>% 
   summarise(geometry = st_union(geometry))
 
-#create fake data
-#you can read in your vet data here
-dma_vet_df <- data.frame(dma_shapes) %>% 
-  select(TVDMA)
+# Then we need a slim data set of just the variables I want to map by DMA. 
+dma_vars <- dma_county_df %>% select(TVDMA, percent_vet_DMA, relative_DMA_vet_pop) %>% distinct()
 
-dma_vet_df$vet_pct <- sample(100, size = nrow(dma_vet_df), replace = TRUE)
+# join the data sets and prepare to graph
+dma_df_map <- full_join(dma_df_map, dma_vars, by="TVDMA")
 
-#create binned factor variable
-dma_vet_df2 <- dma_vet_df %>% 
-  mutate(vet_pct_bin = case_when(
-    vet_pct < 33 ~ "Low",
-    vet_pct >= 33 & vet_pct <= 66 ~ "Medium",
-    vet_pct > 66 ~ "High"
-  ),
-  vet_pct_factor = factor(vet_pct_bin, levels = c("Low", "Medium", "High")))
+## make labels for the DMA plot
+ 
+dma_df_map <- dma_df_map %>% mutate(
+DMA_rank = case_when(
+  TVDMA == "NORFOLK - PORTSMOUTH - NEWPORT NEWS, VA - NC" ~ 1,
+  TVDMA == "FAIRBANKS, AK" ~ 2,
+  TVDMA == "COLORADO SPRINGS - PUEBLO, CO" ~ 3,
+  TVDMA == "MOBILE, AL - PENSACOLA, FL - MS" ~ 4,
+  TVDMA == "PANAMA CITY, FL" ~ 5,
+  TVDMA == "LOS ANGELES, CA" ~ 207,
+  TVDMA == "MIAMI - FT. LAUDERDALE, FL" ~ 208,
+  TVDMA == "NEW YORK, NY - CT - NJ - PA" ~ 209,
+  TVDMA == "HARLINGEN - WESLACO - BROWNSVILLE - MCALLEN, TX" ~ 210,
+  TVDMA == "LAREDO, TX" ~ 211))
 
+list(dma_df_map$DMA_rank)
 
-levels(dma_vet_df2$vet_pct_factor)
+## save to RDS and read back in
+saveRDS(dma_county_df, "data/ch4_county_map_data.rds")
+saveRDS(dma_df_map, "data/ch4_DMA_map_data.rds")
 
+rm(list=ls())
 
-#join DMA shapes and outcome variable
-map_df <- left_join(dma_shapes, dma_vet_df2, by = "TVDMA")
+###### Use this code below this line  in Chapter 4 to print graphs ###
 
-#create map
-ggplot(data = full_map_data) +
-  geom_sf(aes(fill = county_vet_percent), color = "grey50") + #select plotting variable and specify border color 
-  coord_sf(default_crs = st_crs(4326), xlim = c(-125, -73), ylim = c(22, 51)) + #change lims to zoom
-  theme_bw() 
+dma_county_df <- readRDS("data/ch4_county_map_data.rds")
+dma_df_map <- readRDS("data/ch4_DMA_map_data.rds")
 
-+
-  scale_fill_manual(values=c("pink", "red", "darkred"), name = "Vet %") + #select colors and legend name
+## Data Ready to Map ##
+
+#create county map
+ggplot(data = dma_county_df, aes(geometry = geometry, fill=relative_cty_vet_pop)) + 
+  geom_sf(lwd=.015) + coord_sf(datum = NA) + theme_bw() +
+  scale_fill_manual(values=c("bisque", "pink", "darkorange", "red", "darkred"), name = "Vet %\nof Pop.", breaks=c("verylow", "low", "avg","high","veryhigh"), labels=c("less than 30% lower\nthan national average", "10%-30% lower\nthan national average", "within 10% of\nnational average", "10-30% higher than\nnational average", "more than 30% higher\nthan national average")) + #select colors and legend name
   theme(plot.title = element_text(hjust = 0.5)) + #center title
-  labs(title = "Veteran Percentage by DMA") 
+  labs(title = "Veteran Percentage of Population by County") +
+  guides(fill = guide_legend(ncol=3,nrow=2,byrow=TRUE), shape=guide_legend(ncol=3,nrow=2,byrow=TRUE)) + 
+  theme(legend.position="bottom") 
 
 
-+ #add main title
-  geom_sf_text(aes(label = CTYNAME), size = 1)
+
+# make the DMA plot
+ggplot(dma_df_map, aes(geometry = geometry, fill=relative_DMA_vet_pop)) + 
+  geom_sf(lwd=.6) + 
+  coord_sf(datum = NA) + 
+  theme_bw() +
+  scale_fill_manual(values=c("bisque", "pink", "darkorange", "red", "darkred"), name = "Vet. %\nof Pop.", breaks=c("verylow", "low", "avg","high","veryhigh"), labels=c("less than 30% lower\nthan national average", "10%-30% lower\nthan national average", "within 10% of\nnational average", "10-30% higher than\nnational average", "more than 30% higher\nthan national average")) + #select colors and legend name
+  theme(plot.title = element_text(hjust = 0.5)) + #center title
+  labs(title = "Veteran Percentage of Population by Media Market",
+       x="",
+       y="") +
+  guides(fill = guide_legend(ncol=3,nrow=2,byrow=TRUE), shape=guide_legend(ncol=3,nrow=2,byrow=TRUE)) + 
+  theme(legend.position="bottom") +
+  ggrepel::geom_label_repel(
+    aes(label = DMA_rank, geometry= geometry), size = 4 , stat="sf_coordinates", min.segment.length=0, fill="white", show.legend = FALSE)
+
+
+## alternate version
+
+ggplot(data = dma_df_map, aes(geometry = geometry, fill=relative_DMA_vet_pop)) + 
+  geom_sf(lwd=.6) + 
+  coord_sf(datum = NA) + theme_bw() +
+  scale_fill_manual(values=c("bisque", "pink", "darkorange", "red", "darkred"), name = "Vet. %\nof Pop.", breaks=c("verylow", "low", "avg","high","veryhigh"), labels=c("less than 30% lower\nthan national average", "10%-30% lower\nthan national average", "within 10% of\nnational average", "10-30% higher than\nnational average", "more than 30% higher\nthan national average")) + #select colors and legend name
+  theme(plot.title = element_text(hjust = 0.5)) + #center title
+  labs(title = "Veteran Percentage of Population by DMA",
+       x="",
+       y="") +
+  guides(fill = guide_legend(ncol=3,nrow=2,byrow=TRUE), shape=guide_legend(ncol=3,nrow=2,byrow=TRUE)) + 
+  theme(legend.position="bottom") +
+  geom_sf_text(aes(label = DMA_rank), size = 4) 
+
+
