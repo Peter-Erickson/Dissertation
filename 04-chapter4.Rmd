@@ -93,7 +93,7 @@ To see this linkage between veterans in the population and military prestige, re
 
 Said differently, it is reasonable to speculate that the military is in fact more central - and thus more prestigious - in the areas surrounding Norfolk, VA than it is to those surrounding San Francisco, CA. There is no available public opinion data, at least that I am aware of, that can prove this outright. However, if we consider that the military institution comprises a central part of the former area's economic base, so much so that one military online base guide says that in the state of Virginia, "the cities of Newport News, Hampton, Norfolk, Virginia Beach, and Chesapeake -- is the east coast epicenter of military activity," then using a measure of veterans in the population as a proxy for prestige seems plausible at the very least [@noauthor_hampton_nodate]. 
 
-Figure \@ref(fig:vetpop_county) displays the density of veterans in the population by county in the United States. The national average for veterans as a percentage of county population in the United States is 7.3%. The main takeaway from Figure \@ref(fig:vetpop-county) is that there is intrastate variation in the density of veterans as a percentage of the population. This suggests that there are complex factors beyond those that vary at only the state level in shaping where veterans reside. 
+Figure \@ref(fig:vetpop-county) displays the density of veterans in the population by county in the United States. The national average for veterans as a percentage of county population in the United States is 7.3%. The main takeaway from Figure \@ref(fig:vetpop-county) is that there is intrastate variation in the density of veterans as a percentage of the population. This suggests that there are complex factors beyond those that vary at only the state level in shaping where veterans reside. 
 
 ``` {r vetpop-county-prep, include=F, echo=F, warning=F, message=F, error=F}
 dma_county_df <- readRDS("data/ch4_county_map_data.rds")
@@ -220,7 +220,6 @@ Before setting out to watch the advertisements, I develop several dichotomous va
 The first kind of military imagery, that of US soldiers or troops, include images of US servicemen and women who are in uniform. This type of military imagery might include a lone soldier in uniform saluting, or images of thousands of US servicemen and women training, or marching in formation. The key thing I look for are images of US military uniforms, military medals, or military insignia that clearly denote US troops. 
 
 The second type of military imagery involves veterans. This indicator variable looks for any image of a veteran, which could include gatherings of veterans, such as an American Legion or Veterans of Foreign Wars group, imagery of a wounded veteran recovering in a hospital, or a a wounded veteran in a wheelchair later in life with his or her family. Several advertisements aired by candidates who themselves are veterans feature such images, ostensibly to bolster these candidates' credentials with respect to veterans-related issues. 
-
 A third type of military imagery involves images of combat. This variable looks for images such as an explosion related to a military conflict, a soldier driving a tank in combat, or any scene that that is clearly intended to portray US soldiers fighting in conflict.^[This category does not include images of fighting that clearly involve non-US soldiers, such as soldiers of a foreign military or members of a terrorist group.] The fourth indicator variable for type of military imagery accounts for images of US military hardware. This variable captures advertisements that contain images or scenes of any major military hardware item, such as a naval vessel, a fighter jet, an aircraft carrier, or military radar system. The key item of interest associated with this variable is something other than a veteran, an active duty soldier, or a scene from combat that is nonetheless clearly related to the US military. I do allow for the possibility that an advertisement portrays or includes more than one type of military imagery. 
 
 In addition to these four variables pertaining to types of military imagery, I develop four additional variables that measure several other items of interest, including the overall purpose of the advertisement, whether the candidate is a veteran, whether the advertisement explicitly mentions or portrays that the featured candidate is a veteran, and whether the advertisement itself is entirely focused on military, defense, veteran, and/or or national security issues. These variables, the question they intend to answer, and the potential values these variables can take, are displayed in Table \@ref(tab:el-ads-additional-ch4).
@@ -476,17 +475,20 @@ Additionally, Figure \@ref(fig:vetpop-DMA) displays the density of veterans as a
 
 dma_df_map <- readRDS("data/ch4_DMA_map_data.rds")
 
-dma_vet_plot <- ggplot(data = dma_df_map, aes(geometry = geometry, fill=relative_DMA_vet_pop)) + 
+dma_vet_plot <- ggplot(dma_df_map, aes(geometry = geometry, fill=relative_DMA_vet_pop)) + 
   geom_sf(lwd=.6) + 
-  coord_sf(datum = NA) + theme_bw() +
+  coord_sf(datum = NA) + 
+  theme_bw() +
   scale_fill_manual(values=c("bisque", "pink", "darkorange", "red", "darkred"), name = "Vet. %\nof Pop.", breaks=c("verylow", "low", "avg","high","veryhigh"), labels=c("less than 30% lower\nthan national average", "10%-30% lower\nthan national average", "within 10% of\nnational average", "10-30% higher than\nnational average", "more than 30% higher\nthan national average")) + #select colors and legend name
   theme(plot.title = element_text(hjust = 0.5)) + #center title
-  labs(title = "Veteran Percentage of Population by DMA",
+  labs(title = "Veteran Percentage of Population by Media Market",
        x="",
        y="") +
   guides(fill = guide_legend(ncol=3,nrow=2,byrow=TRUE), shape=guide_legend(ncol=3,nrow=2,byrow=TRUE)) + 
   theme(legend.position="bottom") +
-  geom_sf_text(aes(label = DMA_rank), size = 4) 
+  ggrepel::geom_label_repel(
+    aes(label = DMA_rank, geometry= geometry), size = 4 , stat="sf_coordinates", min.segment.length=0, fill="white", show.legend = FALSE)
+ 
 ```
 
 ```{r vetpop-DMA, include=T, warning=F, error=F, message=F, echo=F, fig.cap= "Veteran Percentage of the Population, by Media Market", fig.height=7, fig.width=6}
@@ -694,7 +696,6 @@ Though it would be ideal if the logistic and OLS regression results displayed ex
 First, we know that media markets do in fact generate varying levels of campaign advertisements, as shown in Table \@ref(tab:top-bottom-vet-mkts). Second, each aired advertisement facilitates the observation of ad-level variables that can only be controlled for in the logistic regression. In other words, when an ad is observed, it is automatically possible to ascertain control variables such as the veteran status and the political party of a featured candidate or group of candidate(s). For these reasons, while we certainly should not discount the OLS regression results, we can perhaps pay more attention to the logistic regression results, and to what they point to.
 
 To be clear, the results obtained in this chapter do not enable drawing the firm and sharp conclusion that variation in military prestige - as measured by the per capita veteran population in each media market - drives the degree to which political candidates employ military figures in campaign ads in ways that violate the principles of civil-military relations. We cannot draw this conclusion firmly because there may be other factors that are correlated with the per capita veteran population, such as partisanship, that may prove to play a stronger role in influencing the degree to which military figures appear in advertisements, and the subsequent behavior these figures undertake. 
-
 It could also be that veterans in each media market simply constitute a potential voting block that political candidates are cognizant of and subsequently target through advertising. Through this lens, there is no linkage between military prestige and the per capita veteran population of a media market.
 
 Although this is a very real possibility, we cannot ignore that contemporary scholars have shown evidence that suggests military enlistment is not random to geographic location, even if scholars have not concluded the underlying reasons why this is the case [@savell_numbers_2020]. Therefore, we can conclude that the results presented here are, at the very least, consistent with the notion that to the degree that per capita veteran population is a plausible proxy for military prestige, then variation in military prestige impacts the degree to which military figures appear in presidential campaign ads, endorse political candidates explicitly, and address outside issues. 
